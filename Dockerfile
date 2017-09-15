@@ -1,29 +1,29 @@
 FROM ubuntu:16.04
 
 ENV DEBIAN_FRONTEND noninteractive
+WORKDIR /root
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends --allow-unauthenticated \
+    && apt-get install -y --no-install-recommends --allow-unauthenticated git nginx \
         kubuntu-desktop \
         supervisor \
-        openssh-server pwgen sudo vim-tiny \
+        sudo vim-tiny \
         net-tools \
         x11vnc xvfb \
         fonts-wqy-microhei \
         language-pack-zh-hant language-pack-gnome-zh-hant firefox-locale-zh-hant libreoffice-l10n-zh-tw \
-        nginx \
         python-pip python-dev build-essential \
         mesa-utils libgl1-mesa-dri \
         dbus-x11 x11-utils \
+    && localedef -i zh_TW -c -f UTF-8 -A /usr/share/locale/locale.alias zh_TW.UTF-8
+    && cd /usr/lib \
+    && git clone https://github.com/novnc/noVNC \
     && apt-get autoclean \
     && apt-get autoremove \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
 
-ADD image /
-RUN pip install setuptools wheel && pip install -r /usr/lib/web/requirements.txt
+ADD default.conf /etc/nginx/sites-enabled/default
+ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 80 5900
-WORKDIR /root
-ENV HOME=/home/ubuntu \
-    SHELL=/bin/bash
 ENTRYPOINT ["/startup.sh"]
