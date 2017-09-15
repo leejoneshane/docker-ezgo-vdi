@@ -6,8 +6,8 @@ ENV DEBIAN_FRONTEND noninteractive \
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends --allow-unauthenticated sudo vim-tiny wget git \
-    && adduser --shell /bin/bash --disabled-password ezgo \
-    && usermod -G sudoers ezgo \
+    && useradd -s /bin/bash ezgo \
+    && usermod -G sudo ezgo \
     && wget -O - http://ezgo.goodhorse.idv.tw/apt/ezgo/ezgo.gpg.key | apt-key add - \
     && add-apt-repository ppa:fcitx-team/nightly \
     && echo "deb http://ezgo.goodhorse.idv.tw/apt/ezgo/ ezgo13 main" > /etc/apt/sources.list.d/ezgo.list \
