@@ -8,10 +8,10 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends sudo vim-tiny wget git \
     && useradd -s /bin/bash ezgo \
     && usermod -G sudo ezgo \
-    && wget -O - http://ezgo.goodhorse.idv.tw/apt/ezgo/ezgo.gpg.key | apt-key add - \
+    && wget --no-check-certificate -O - http://ezgo.goodhorse.idv.tw/apt/ezgo/ezgo.gpg.key | apt-key add - \
     && add-apt-repository ppa:fcitx-team/nightly \
     && echo "deb http://ezgo.goodhorse.idv.tw/apt/ezgo/ ezgo13 main" > /etc/apt/sources.list.d/ezgo.list \
-    && apt-get --allow-unauthenticated update \ 
+    && apt-get update \ 
     && apt-get install -y --no-install-recommends --allow-unauthenticated \
         nginx net-tools \
         kubuntu-desktop \
