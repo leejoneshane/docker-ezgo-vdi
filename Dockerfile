@@ -1,7 +1,8 @@
 FROM ubuntu:16.04
 
-ENV DEBIAN_FRONTEND noninteractive
-ENV TINI_VERSION v0.16.1
+ENV DEBIAN_FRONTEND noninteractive \
+    TINI_VERSION v0.16.1 \
+    TZ=Asia/Taipei
 
 RUN adduser --shell /bin/bash --disabled-password ezgo \
     && usermod -G sudoers ezgo \
@@ -32,6 +33,7 @@ RUN adduser --shell /bin/bash --disabled-password ezgo \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* \
     && localedef -i zh_TW -c -f UTF-8 -A /usr/share/locale/locale.alias zh_TW.UTF-8 \
+    && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && cd /usr/lib \
     && git clone https://github.com/novnc/noVNC \
     && cd /bin \
