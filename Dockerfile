@@ -4,9 +4,10 @@ ENV DEBIAN_FRONTEND noninteractive \
     TINI_VERSION v0.16.1 \
     TZ=Asia/Taipei
 
-RUN adduser --shell /bin/bash --disabled-password ezgo \
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends --allow-unauthenticated sudo vim-tiny wget git \
+    && adduser --shell /bin/bash --disabled-password ezgo \
     && usermod -G sudoers ezgo \
-    && apt-get update && apt-get install -y --no-install-recommends --allow-unauthenticated sudo vim-tiny wget git \
     && wget -O - http://ezgo.goodhorse.idv.tw/apt/ezgo/ezgo.gpg.key | apt-key add - \
     && add-apt-repository ppa:fcitx-team/nightly \
     && echo "deb http://ezgo.goodhorse.idv.tw/apt/ezgo/ ezgo13 main" > /etc/apt/sources.list.d/ezgo.list \
