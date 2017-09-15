@@ -9,7 +9,7 @@ RUN apt-get update \
     && useradd -s /bin/bash ezgo \
     && usermod -G sudo ezgo \
     && wget --no-check-certificate -O - http://ezgo.goodhorse.idv.tw/apt/ezgo/ezgo.gpg.key | apt-key add - \
-    && echo "deb http://ezgo.goodhorse.idv.tw/apt/ezgo/ ezgo13 main" > /etc/apt/sources.list.d/ezgo.list \
+    && echo "deb http://ezgo.goodhorse.idv.tw/apt/ezgo/ testing main" > /etc/apt/sources.list.d/ezgo.list \
     && apt-get update \ 
     && apt-get install -y --no-install-recommends --allow-unauthenticated \
         nginx net-tools \
