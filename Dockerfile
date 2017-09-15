@@ -24,7 +24,7 @@ RUN apt-get update \
 ADD image /
 RUN pip install setuptools wheel && pip install -r /usr/lib/web/requirements.txt
 
-EXPOSE 80 5900 6801
+EXPOSE 80 5900
 WORKDIR /root
 ENV HOME=/home/ubuntu \
     SHELL=/bin/bash
