@@ -3,18 +3,31 @@ FROM ubuntu:16.04
 ENV DEBIAN_FRONTEND noninteractive
 ENV TINI_VERSION v0.16.1
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends --allow-unauthenticated wget git nginx \
+RUN adduser --shell /bin/bash --disabled-password ezgo \
+    && usermod -G sudoers ezgo \
+    && apt-get update && apt-get install -y --no-install-recommends --allow-unauthenticated sudo vim-tiny wget git \
+    && wget -O - http://ezgo.goodhorse.idv.tw/apt/ezgo/ezgo.gpg.key | apt-key add - \
+    && add-apt-repository ppa:fcitx-team/nightly \
+    && echo "deb http://ezgo.goodhorse.idv.tw/apt/ezgo/ ezgo13 main" > /etc/apt/sources.list.d/ezgo.list \
+    && apt-get update && apt-get install -y --no-install-recommends --allow-unauthenticated \
+        nginx net-tools \
         kubuntu-desktop \
-        supervisor \
-        sudo vim-tiny \
-        net-tools \
-        x11vnc xvfb \
-        fonts-wqy-microhei \
+        qtqr gimp tuxpaint inkscape vlc filezilla winff audacity \
+        about-ezgo adobeair ezgo-accessories ezgo-artwork ezgo-atayal ezgo-chem ezgo-common ezgo-doc ezgo-ecare \
+        ezgo-education ezgo-games ezgo-graphics ezgo-gsyan ezgo-kde5 ezgo-menu ezgo-misc ezgo-misc-7zip \
+        ezgo-misc-arduino-rules ezgo-misc-audacity ezgo-misc-decompress ezgo-misc-desktop-files \
+        ezgo-misc-furiusisomount ezgo-misc-inkscape ezgo-misc-installer ezgo-misc-jkiwi ezgo-misc-kdenlive \
+        ezgo-misc-klavaro ezgo-misc-ksnapshot ezgo-misc-ktuberling ezgo-misc-qtqr ezgo-misc-recover \
+        ezgo-misc-tuxpaint ezgo-misc-winff ezgo-multimedia ezgo-network ezgo-npa ezgo-office ezgo-phet \
+        ezgo-s4a ezgo-scratch2 ezgo-tasks ezgo-unity ezgo-usgs ezgo-wordtest oxobasisr6* oxoffice6* \
+        transformer-community ubiquity-slideshow-ezgo xmind \
+        fcitx fcitx-chewing fcitx-frontend-all fcitx-libs-qt5 fcitx-table-array30-big fcitx-table-cangjie3 \
+        fcitx-tools fcitx-m17n ezgo-misc-fcitx-dayi3 \
         language-pack-zh-hant language-pack-gnome-zh-hant firefox-locale-zh-hant libreoffice-l10n-zh-tw \
         python-pip python-dev build-essential \
         mesa-utils libgl1-mesa-dri \
-        dbus-x11 x11-utils \
+        x11vnc xvfb dbus-x11 x11-utils \
+        supervisor \
     && apt-get autoclean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* \
