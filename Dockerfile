@@ -8,8 +8,8 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends sudo vim-tiny wget git apt-transport-https \
     && useradd -s /bin/bash ezgo \
     && usermod -G sudo ezgo \
-    && wget --no-check-certificate -O - http://ezgo.goodhorse.idv.tw/apt/ezgo/ezgo.gpg.key | apt-key add - \
-    && echo "deb http://ezgo.goodhorse.idv.tw/apt/ezgo/ testing main" > /etc/apt/sources.list.d/ezgo.list \
+    && wget --no-check-certificate -O - https://ezgo.goodhorse.idv.tw/apt/ezgo/ezgo.gpg.key | apt-key add - \
+    && echo "deb https://ezgo.goodhorse.idv.tw/apt/ezgo/ testing main" > /etc/apt/sources.list.d/ezgo.list \
     && apt-get update \ 
     && apt-get install -y --no-install-recommends --allow-unauthenticated \
         nginx net-tools \
