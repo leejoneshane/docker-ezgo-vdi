@@ -8,16 +8,15 @@ ADD https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb /
 ADD servers.conf /etc/supervisor/conf.d/servers.conf
    
 RUN apt-get update \
-    && apt-get install -y sudo vim-tiny wget git apt-transport-https ca-certificates \
-	&& addgroup chrome-remote-desktop \
-	&& useradd -m -s /bin/bash -G sudo,chrome-remote-desktop,pulse-access ezgo \
+    && apt-get install -y sudo vim-tiny wget git apt-transport-https ca-certificates pulseaudio fluxbox \
+    && addgroup chrome-remote-desktop \
+    && useradd -m -s /bin/bash -G sudo,chrome-remote-desktop,pulse-access ezgo \
     && wget --no-check-certificate -O - https://ezgo.goodhorse.idv.tw/apt/ezgo/ezgo.gpg.key | apt-key add - \
     && echo "deb https://ezgo.goodhorse.idv.tw/apt/ezgo/ ezgo13 main" > /etc/apt/sources.list.d/ezgo.list \
     && dpkg --add-architecture i386 \
     && apt-get update \ 
     && apt-get install -y \
         openssh-server python-pip python-dev build-essential mesa-utils x11vnc xvfb xrdp supervisor \
-        pulseaudio fluxbox \
         kubuntu-desktop \
 #        qtqr gimp tuxpaint inkscape vlc filezilla winff audacity \
 #        about-ezgo libbz2-1.0:i386 adobeair ezgo-accessories ezgo-artwork ezgo-atayal ezgo-chem ezgo-common ezgo-doc \
