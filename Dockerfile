@@ -50,8 +50,10 @@ RUN apt-get update \
     && chmod +x /bin/tini
     
 ADD default.conf /etc/nginx/sites-enabled/default
-ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+ADD supervisord.conf /etc/supervisor/supervisord.conf
 ADD startup.sh /sbin/startup.sh
+
+RUN chmod +x /sbin/startup.sh
 
 WORKDIR /root
 EXPOSE 80 5900
