@@ -14,6 +14,8 @@ RUN apt-get update \
     && wget --no-check-certificate -O - https://ezgo.goodhorse.idv.tw/apt/ezgo/ezgo.gpg.key | apt-key add - \
     && echo "deb https://ezgo.goodhorse.idv.tw/apt/ezgo/ ezgo13 main" > /etc/apt/sources.list.d/ezgo.list \
     && dpkg --add-architecture i386 \
+    && localedef -i zh_TW -c -f UTF-8 -A /usr/share/locale/locale.alias zh_TW.UTF-8 \
+    && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && apt-get update \ 
     && apt-get install -y \
         openssh-server python-pip python-dev build-essential mesa-utils x11vnc xvfb xrdp supervisor \
@@ -45,8 +47,6 @@ RUN apt-get update \
 #    && chmod +x adobe-air.sh \
 #    && ./adobe-air.sh \
 #    && wget -O scratch2.air https://scratch.mit.edu/scratchr2/static/sa/Scratch-456.0.4.air \
-    && localedef -i zh_TW -c -f UTF-8 -A /usr/share/locale/locale.alias zh_TW.UTF-8 \
-    && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && cd /usr/lib \
     && git clone https://github.com/novnc/noVNC \
     && xrdp-keygen xrdp auto \
