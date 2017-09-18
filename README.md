@@ -1,6 +1,6 @@
 # docker-ezgo-vdi
 
-run [ezgo](http://ezgo.westart.tw/) in docker to provide virtual desktop.
+run *[ezgo](http://ezgo.westart.tw/)* in docker to provide virtual desktop.
 
 **Quick Start**
 
