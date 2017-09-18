@@ -14,7 +14,7 @@ RUN apt-get update \
     && dpkg --add-architecture i386 \
     && apt-get update \ 
     && apt-get install -y \
-        nginx net-tools python-pip python-dev build-essential mesa-utils x11vnc xvfb supervisor \
+        python-pip python-dev build-essential mesa-utils x11vnc xvfb supervisor \
         kubuntu-desktop \
 #        qtqr gimp tuxpaint inkscape vlc filezilla winff audacity \
 #        about-ezgo libbz2-1.0:i386 adobeair ezgo-accessories ezgo-artwork ezgo-atayal ezgo-chem ezgo-common ezgo-doc \
@@ -49,7 +49,6 @@ RUN apt-get update \
     && wget https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini \
     && chmod +x /bin/tini
     
-ADD default.conf /etc/nginx/sites-enabled/default
 ADD servers.conf /etc/supervisor/conf.d/servers.conf
 ADD startup.sh /sbin/startup.sh
 
