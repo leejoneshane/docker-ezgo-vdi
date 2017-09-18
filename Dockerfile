@@ -14,12 +14,8 @@ RUN apt-get update \
     && dpkg --add-architecture i386 \
     && apt-get update \ 
     && apt-get install -y \
-        nginx net-tools \
+        nginx net-tools python-pip python-dev build-essential mesa-utils x11vnc xvfb supervisor \
         kubuntu-desktop \
-        python-pip python-dev build-essential \
-        mesa-utils libgl1-mesa-dri \
-        x11vnc xvfb dbus-x11 x11-utils \
-        supervisor \
 #        qtqr gimp tuxpaint inkscape vlc filezilla winff audacity \
 #        about-ezgo libbz2-1.0:i386 adobeair ezgo-accessories ezgo-artwork ezgo-atayal ezgo-chem ezgo-common ezgo-doc \
 #        ezgo-ecare ezgo-education ezgo-games ezgo-graphics ezgo-gsyan ezgo-kde5 ezgo-menu ezgo-misc ezgo-misc-7zip \
