@@ -5,11 +5,12 @@ ENV TINI_VERSION v0.16.1
 ENV TZ=Asia/Taipei
 
 RUN apt-get update \
-    && apt-get install -y sudo vim-tiny wget git apt-transport-https ca-certificates \
+    && apt-get install -y sudo vim-tiny wget git apt-transport-https ca-certificates software-properties-common python-software-properties \
     && useradd -s /bin/bash ezgo \
     && usermod -G sudo ezgo \
     && wget --no-check-certificate -O - https://ezgo.goodhorse.idv.tw/apt/ezgo/ezgo.gpg.key | apt-key add - \
     && echo "deb https://ezgo.goodhorse.idv.tw/apt/ezgo/ testing main" > /etc/apt/sources.list.d/ezgo.list \
+    && add-apt-repository ppa:webupd8team/java \
     && apt-get update \ 
     && apt-get install -y \
         nginx net-tools \
@@ -18,12 +19,11 @@ RUN apt-get update \
         about-ezgo libbz2-1.0:i386 adobeair ezgo-accessories ezgo-artwork ezgo-atayal ezgo-chem ezgo-common ezgo-doc \
         ezgo-ecare ezgo-education ezgo-games ezgo-graphics ezgo-gsyan ezgo-kde5 ezgo-menu ezgo-misc ezgo-misc-7zip \
         ezgo-misc-arduino-rules ezgo-misc-audacity ezgo-misc-decompress ezgo-misc-desktop-files \
-        ezgo-misc-furiusisomount ezgo-misc-inkscape ezgo-misc-installer sun-java6-jre sun-java5-jre icedtea-java7-jre \
-        openjdk-6-jre jkiwi ezgo-misc-jkiwi ezgo-misc-kdenlive \
+        ezgo-misc-furiusisomount ezgo-misc-inkscape ezgo-misc-installer icedtea-netx-common icedtea-netx default-jdk \
+        oracle-java8-installer jkiwi ezgo-misc-jkiwi ezgo-misc-kdenlive \
         ezgo-misc-klavaro ezgo-misc-ksnapshot ezgo-misc-ktuberling ezgo-misc-qtqr ezgo-misc-recover \
-        ezgo-misc-tuxpaint ezgo-misc-winff ezgo-multimedia ezgo-network ezgo-npa ezgo-office ezgo-phet \
-        ezgo-s4a libxt6:i386 libnspr4-0d:i386 libgtk2.0-0:i386 libstdc++6:i386 libnss3-1d:i386 libnss-mdns:i386 \
-        libxml2:i386 libxslt1.1:i386 libcanberra-gtk-module:i386 gtk2-engines-murrine:i386 libgnome-keyring0:i386 \
+        ezgo-misc-tuxpaint ezgo-misc-winff ezgo-multimedia ezgo-network ezgo-npa ezgo-office ezgo-phet ezgo-s4a \
+        libxt6:i386 libnspr4-0d:i386 libgtk2.0-0:i386 libstdc++6:i386 libnss3-1d:i386 lib32nss-mdns:i386 libxml2:i386 libxslt1.1:i386 libcanberra-gtk-module:i386 gtk2-engines-murrine:i386 \
         ezgo-scratch2 ezgo-tasks ezgo-unity ezgo-usgs ezgo-wordtest libreoffice \
         transformer-community ubiquity-slideshow-ezgo \
         fcitx fcitx-chewing fcitx-frontend-all fcitx-libs-qt5 fcitx-table-array30-big fcitx-table-cangjie3 \
