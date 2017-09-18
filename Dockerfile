@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:14.04
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV TINI_VERSION v0.16.1
