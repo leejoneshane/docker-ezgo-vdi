@@ -50,7 +50,7 @@ RUN apt-get update \
     && chmod +x /bin/tini
     
 ADD default.conf /etc/nginx/sites-enabled/default
-ADD supervisord.conf /etc/supervisor/supervisord.conf
+ADD servers.ini /etc/supervisor/conf.d/servers.ini
 ADD startup.sh /sbin/startup.sh
 
 RUN chmod +x /sbin/startup.sh
