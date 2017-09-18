@@ -22,7 +22,7 @@ RUN apt-get update \
         ezgo-misc-klavaro ezgo-misc-ksnapshot ezgo-misc-ktuberling ezgo-misc-qtqr ezgo-misc-recover \
         ezgo-misc-tuxpaint ezgo-misc-winff ezgo-multimedia ezgo-network ezgo-npa ezgo-office ezgo-phet \
         ezgo-s4a ezgo-scratch2 ezgo-tasks ezgo-unity ezgo-usgs ezgo-wordtest oxobasisr6* oxoffice6* \
-        transformer-community ubiquity-slideshow-ezgo xmind \
+        transformer-community ubiquity-slideshow-ezgo \
         fcitx fcitx-chewing fcitx-frontend-all fcitx-libs-qt5 fcitx-table-array30-big fcitx-table-cangjie3 \
         fcitx-tools fcitx-m17n ezgo-misc-fcitx-dayi3 \
         language-pack-zh-hant language-pack-gnome-zh-hant firefox-locale-zh-hant libreoffice-l10n-zh-tw \
