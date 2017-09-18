@@ -37,7 +37,7 @@ RUN apt-get update \
     && apt-get autoclean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* \
-    && cd /root \
+#    && cd /root \
 #    && wget https://www.xmind.net/xmind/downloads/xmind-8-update4-linux.zip \
 #    && unzip xmind-8-update4-linux.zip \
 #    && /root/xmind-8-update4-linux/setup.sh \
@@ -45,7 +45,7 @@ RUN apt-get update \
 #    && chmod +x adobe-air.sh \
 #    && ./adobe-air.sh \
 #    && wget -O scratch2.air https://scratch.mit.edu/scratchr2/static/sa/Scratch-456.0.4.air \
-#    && localedef -i zh_TW -c -f UTF-8 -A /usr/share/locale/locale.alias zh_TW.UTF-8 \
+    && localedef -i zh_TW -c -f UTF-8 -A /usr/share/locale/locale.alias zh_TW.UTF-8 \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && cd /usr/lib \
     && git clone https://github.com/novnc/noVNC \
