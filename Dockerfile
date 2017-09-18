@@ -18,10 +18,10 @@ RUN apt-get update \
         about-ezgo adobeair ezgo-accessories ezgo-artwork ezgo-atayal ezgo-chem ezgo-common ezgo-doc ezgo-ecare \
         ezgo-education ezgo-games ezgo-graphics ezgo-gsyan ezgo-kde5 ezgo-menu ezgo-misc ezgo-misc-7zip \
         ezgo-misc-arduino-rules ezgo-misc-audacity ezgo-misc-decompress ezgo-misc-desktop-files \
-        ezgo-misc-furiusisomount ezgo-misc-inkscape ezgo-misc-installer ezgo-misc-jkiwi ezgo-misc-kdenlive \
+        ezgo-misc-furiusisomount ezgo-misc-inkscape ezgo-misc-installer jkiwi ezgo-misc-jkiwi ezgo-misc-kdenlive \
         ezgo-misc-klavaro ezgo-misc-ksnapshot ezgo-misc-ktuberling ezgo-misc-qtqr ezgo-misc-recover \
         ezgo-misc-tuxpaint ezgo-misc-winff ezgo-multimedia ezgo-network ezgo-npa ezgo-office ezgo-phet \
-        ezgo-s4a ezgo-scratch2 ezgo-tasks ezgo-unity ezgo-usgs ezgo-wordtest oxobasisr6* oxoffice6* \
+        ezgo-s4a ezgo-scratch2 ezgo-tasks ezgo-unity ezgo-usgs ezgo-wordtest libreoffice \
         transformer-community ubiquity-slideshow-ezgo \
         fcitx fcitx-chewing fcitx-frontend-all fcitx-libs-qt5 fcitx-table-array30-big fcitx-table-cangjie3 \
         fcitx-tools fcitx-m17n ezgo-misc-fcitx-dayi3 \
