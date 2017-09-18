@@ -5,13 +5,13 @@ ENV TINI_VERSION v0.16.1
 ENV TZ=Asia/Taipei
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends sudo vim-tiny wget git apt-transport-https ca-certificates \
+    && apt-get install -y sudo vim-tiny wget git apt-transport-https ca-certificates \
     && useradd -s /bin/bash ezgo \
     && usermod -G sudo ezgo \
     && wget --no-check-certificate -O - https://ezgo.goodhorse.idv.tw/apt/ezgo/ezgo.gpg.key | apt-key add - \
     && echo "deb https://ezgo.goodhorse.idv.tw/apt/ezgo/ testing main" > /etc/apt/sources.list.d/ezgo.list \
     && apt-get update \ 
-    && apt-get install -y --no-install-recommends --allow-unauthenticated \
+    && apt-get install -y \
         nginx net-tools \
         kubuntu-desktop \
         qtqr gimp tuxpaint inkscape vlc filezilla winff audacity \
