@@ -11,6 +11,7 @@ RUN apt-get update \
     && wget --no-check-certificate -O - https://ezgo.goodhorse.idv.tw/apt/ezgo/ezgo.gpg.key | apt-key add - \
     && echo "deb https://ezgo.goodhorse.idv.tw/apt/ezgo/ testing main" > /etc/apt/sources.list.d/ezgo.list \
     && add-apt-repository ppa:webupd8team/java \
+    && dpkg --add-architecture i386 \
     && apt-get update \ 
     && apt-get install -y \
         nginx net-tools \
