@@ -33,6 +33,11 @@ RUN apt-get update \
     && apt-get autoclean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* \
+    && cd /root \
+    && wget https://www.xmind.net/xmind/downloads/xmind-8-update4-linux.zip \
+    && unzip xmind-8-update4-linux.zip \
+    && cd /root/xmind-8-update4-linux \
+    && ./setup.sh \
     && localedef -i zh_TW -c -f UTF-8 -A /usr/share/locale/locale.alias zh_TW.UTF-8 \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && cd /usr/lib \
