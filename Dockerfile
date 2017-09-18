@@ -5,16 +5,15 @@ ENV TINI_VERSION v0.16.1
 ENV TZ=Asia/Taipei
 
 RUN apt-get update \
-    && apt-get install -y sudo vim-tiny wget git apt-transport-https ca-certificates software-properties-common python-software-properties \
+    && apt-get install -y sudo vim-tiny wget git apt-transport-https ca-certificates \
     && useradd -s /bin/bash ezgo \
     && usermod -G sudo ezgo \
     && wget --no-check-certificate -O - https://ezgo.goodhorse.idv.tw/apt/ezgo/ezgo.gpg.key | apt-key add - \
     && echo "deb https://ezgo.goodhorse.idv.tw/apt/ezgo/ ezgo13 main" > /etc/apt/sources.list.d/ezgo.list \
-    && add-apt-repository ppa:webupd8team/java \
     && dpkg --add-architecture i386 \
     && apt-get update \ 
     && apt-get install -y \
-        openssh-server python-pip python-dev build-essential mesa-utils x11vnc xvfb supervisor \
+        openssh-server python-pip python-dev build-essential mesa-utils x11vnc xvfb xrdp supervisor \
         kubuntu-desktop \
 #        qtqr gimp tuxpaint inkscape vlc filezilla winff audacity \
 #        about-ezgo libbz2-1.0:i386 adobeair ezgo-accessories ezgo-artwork ezgo-atayal ezgo-chem ezgo-common ezgo-doc \
@@ -44,16 +43,10 @@ RUN apt-get update \
     && localedef -i zh_TW -c -f UTF-8 -A /usr/share/locale/locale.alias zh_TW.UTF-8 \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && cd /usr/lib \
-    && git clone https://github.com/novnc/noVNC \
-    && cd /bin \
-    && wget https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini \
-    && chmod +x /bin/tini
+    && git clone https://github.com/novnc/noVNC
     
 ADD servers.conf /etc/supervisor/conf.d/servers.conf
-ADD startup.sh /sbin/startup.sh
-
-RUN chmod +x /sbin/startup.sh
 
 WORKDIR /root
-EXPOSE 80 5900
-CMD ["/sbin/startup.sh"]
+EXPOSE 80 3389 5900
+CMD ["supervisord -n"]
