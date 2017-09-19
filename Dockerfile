@@ -62,4 +62,4 @@ RUN apt-get update \
 	&& chown -R ezgo:ezgo /home/ezgo/.config /home/ezgo/.fluxbox
     
 EXPOSE 80 3389 5900
-CMD ["supervisord -n"]
+CMD ["/usr/bin/supervisord -n"]
