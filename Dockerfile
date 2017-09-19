@@ -1,7 +1,6 @@
 FROM ubuntu:14.04
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV TINI_VERSION v0.16.1
 ENV TZ=Asia/Taipei
 ADD https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb /root/chrome.deb
 ADD https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb /root/crd.deb
