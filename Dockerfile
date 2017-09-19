@@ -19,7 +19,7 @@ RUN apt-get update \
     && apt-get update \ 
     && apt-get install -y \
         openssh-server python-pip python-dev build-essential mesa-utils x11vnc xvfb xrdp supervisor \
-        lubuntu-desktop libappindicator1 \
+        lubuntu-desktop lubuntu-default-settings libappindicator1 \
 	ezgo-menu ezgo-lxde ezgo-artwork \
 #        qtqr gimp tuxpaint inkscape vlc filezilla winff audacity \
 #        libbz2-1.0:i386 adobeair ezgo-accessories ezgo-artwork ezgo-atayal ezgo-chem ezgo-common ezgo-doc \
@@ -34,7 +34,7 @@ RUN apt-get update \
 #        transformer-community ubiquity-slideshow-ezgo \
 #        fcitx fcitx-chewing fcitx-frontend-all fcitx-libs-qt5 fcitx-table-array30-big fcitx-table-cangjie3 \
 #        fcitx-tools fcitx-m17n ezgo-misc-fcitx-dayi3 \
-#        language-pack-zh-hant language-pack-gnome-zh-hant firefox-locale-zh-hant libreoffice-l10n-zh-tw \
+        language-pack-zh-hant language-pack-gnome-zh-hant firefox-locale-zh-hant libreoffice-l10n-zh-tw \
     && apt-get autoclean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* \
