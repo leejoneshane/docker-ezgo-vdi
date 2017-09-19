@@ -24,15 +24,15 @@ RUN apt-get update \
     && apt-get install -y \
         ezgo-menu ezgo-lxde ezgo-artwork \
 #        qtqr gimp tuxpaint inkscape vlc filezilla winff audacity \
-#        libbz2-1.0:i386 adobeair ezgo-accessories ezgo-artwork ezgo-atayal ezgo-chem ezgo-common ezgo-doc \
-#        ezgo-ecare ezgo-education ezgo-games ezgo-graphics ezgo-gsyan ezgo-kde5 ezgo-menu ezgo-misc ezgo-misc-7zip \
+#        libbz2-1.0:i386 adobeair ezgo-accessories ezgo-atayal ezgo-chem ezgo-common ezgo-doc \
+#        ezgo-ecare ezgo-education ezgo-games ezgo-graphics ezgo-gsyan ezgo-misc ezgo-misc-7zip \
 #        ezgo-misc-arduino-rules ezgo-misc-audacity ezgo-misc-decompress ezgo-misc-desktop-files \
 #        ezgo-misc-furiusisomount ezgo-misc-inkscape ezgo-misc-installer icedtea-netx-common icedtea-netx default-jdk \
 #        oracle-java8-installer jkiwi ezgo-misc-jkiwi ezgo-misc-kdenlive \
 #        ezgo-misc-klavaro ezgo-misc-ksnapshot ezgo-misc-ktuberling ezgo-misc-qtqr ezgo-misc-recover \
 #        ezgo-misc-tuxpaint ezgo-misc-winff ezgo-multimedia ezgo-network ezgo-npa ezgo-office ezgo-phet ezgo-s4a \
 #        libxt6:i386 libnspr4-0d:i386 libgtk2.0-0:i386 libstdc++6:i386 libnss3-1d:i386 libnss-mdns:i386 libnss-mdns libxml2:i386 libxslt1.1:i386 libcanberra-gtk-module:i386 gtk2-engines-murrine:i386 \
-#        ezgo-scratch2 ezgo-tasks ezgo-unity ezgo-usgs ezgo-wordtest libreoffice \
+#        ezgo-scratch2 ezgo-tasks ezgo-unity ezgo-usgs ezgo-wordtest firefox libreoffice \
 #        transformer-community ubiquity-slideshow-ezgo \
 #        fcitx fcitx-chewing fcitx-frontend-all fcitx-libs-qt5 fcitx-table-array30-big fcitx-table-cangjie3 \
 #        fcitx-tools fcitx-m17n ezgo-misc-fcitx-dayi3 \
@@ -51,17 +51,16 @@ RUN apt-get update \
     && cd /usr/lib \
     && git clone https://github.com/novnc/noVNC \
     && xrdp-keygen xrdp auto \
-	&& mkdir -p /home/chrome/.config/chrome-remote-desktop \
-	&& mkdir -p /home/chrome/.fluxbox \
+	&& mkdir -p /home/ezgo/.config/chrome-remote-desktop \
+	&& mkdir -p /home/ezgo/.fluxbox \
 	&& echo ' \n\
 		session.screen0.toolbar.visible:        false\n\
 		session.screen0.fullMaximization:       true\n\
 		session.screen0.maxDisableResize:       true\n\
 		session.screen0.maxDisableMove: true\n\
 		session.screen0.defaultDeco:    NONE\n\
-	' >> /home/chrome/.fluxbox/init \
+	' >> /home/ezgo/.fluxbox/init \
 	&& chown -R ezgo:ezgo /home/ezgo/.config /home/ezgo/.fluxbox
     
-WORKDIR /root
 EXPOSE 80 3389 5900
 CMD ["supervisord -n"]
