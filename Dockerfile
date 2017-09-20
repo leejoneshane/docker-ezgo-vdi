@@ -63,4 +63,4 @@ RUN apt-get update \
 
 USER ezgo
 EXPOSE 80 3389 5900
-CMD ["/usr/bin/supervisord -n"]
+CMD ["supervisord -n"]
