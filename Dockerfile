@@ -14,6 +14,7 @@ RUN apt-get update \
     && apt-get install -y sudo vim-tiny wget git apt-transport-https ca-certificates pulseaudio fluxbox \
     && addgroup chrome-remote-desktop \
     && useradd -m -s /bin/bash -G sudo,chrome-remote-desktop,pulse-access ezgo \
+    && passwd -d ezgo \
     && wget --no-check-certificate -O - https://ezgo.goodhorse.idv.tw/apt/ezgo/ezgo.gpg.key | apt-key add - \
     && echo "deb https://ezgo.goodhorse.idv.tw/apt/ezgo/ ezgo13 main" > /etc/apt/sources.list.d/ezgo.list \
     && dpkg --add-architecture i386 \
@@ -67,6 +68,5 @@ RUN apt-get update \
 	' >> /home/ezgo/.fluxbox/init \
 	&& chown -R ezgo:ezgo /home/ezgo/.config /home/ezgo/.fluxbox
 
-USER ezgo
 EXPOSE 80 3389 5900
 CMD ["supervisord -n"]
