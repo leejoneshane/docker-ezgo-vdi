@@ -2,6 +2,10 @@ FROM ubuntu:14.04
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV TZ=Asia/Taipei
+ENV DISPLAY :1
+ENV HOME /home/ezgo
+ENV USER ezgo
+ENV XAUTHORITY /home/ezgo/.Xauthority
 ADD https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb /root/chrome.deb
 ADD https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb /root/crd.deb
 ADD servers.conf /etc/supervisor/conf.d/servers.conf
@@ -49,6 +53,8 @@ RUN apt-get update \
 #    && wget -O scratch2.air https://scratch.mit.edu/scratchr2/static/sa/Scratch-456.0.4.air \
     && cd /usr/lib \
     && git clone https://github.com/novnc/noVNC \
+    && cd /usr/lib/noVNC/utils \
+    && git clone https://github.com/novnc/websockify \
     && xrdp-keygen xrdp auto \
 	&& mkdir -p /home/ezgo/.config/chrome-remote-desktop \
 	&& mkdir -p /home/ezgo/.fluxbox \
