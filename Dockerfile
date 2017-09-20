@@ -60,6 +60,7 @@ RUN apt-get update \
 		session.screen0.defaultDeco:    NONE\n\
 	' >> /home/ezgo/.fluxbox/init \
 	&& chown -R ezgo:ezgo /home/ezgo/.config /home/ezgo/.fluxbox
-    
+
+USER ezgo
 EXPOSE 80 3389 5900
 CMD ["/usr/bin/supervisord -n"]
