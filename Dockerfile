@@ -3,9 +3,6 @@ FROM ubuntu:14.04
 ENV DEBIAN_FRONTEND noninteractive
 ENV TZ=Asia/Taipei
 ENV DISPLAY :1
-ENV HOME /home/ezgo
-ENV USER ezgo
-ENV XAUTHORITY /home/ezgo/.Xauthority
 ADD https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb /root/chrome.deb
 ADD https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb /root/crd.deb
 ADD servers.conf /etc/supervisor/conf.d/servers.conf
@@ -68,5 +65,6 @@ RUN apt-get update \
 	' >> /home/ezgo/.fluxbox/init \
 	&& chown -R ezgo:ezgo /home/ezgo/.config /home/ezgo/.fluxbox
 
+USER root
 EXPOSE 80 3389 5900
 CMD ["supervisord -n"]
