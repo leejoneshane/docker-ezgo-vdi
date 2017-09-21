@@ -1,6 +1,9 @@
 FROM ubuntu:14.04
 
 ENV DEBIAN_FRONTEND noninteractive
+ENV LANG zh_TW.UTF-8
+ENV LANGUAGE zh_TW.utf-8
+ENV LC_ALL zh_TW.UTF-8
 ENV TZ=Asia/Taipei
 ENV DISPLAY :1
 ADD https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb /root/chrome.deb
