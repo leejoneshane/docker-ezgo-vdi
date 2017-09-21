@@ -11,7 +11,7 @@ RUN apt-get update \
     && apt-get install -y sudo vim-tiny wget git apt-transport-https ca-certificates pulseaudio fluxbox \
     && addgroup chrome-remote-desktop \
     && useradd -m -s /bin/bash -G sudo,chrome-remote-desktop,pulse-access ezgo \
-    && passwd -d ezgo \
+    && echo "ezgo:ezgo" | chpasswd \
     && wget --no-check-certificate -O - https://ezgo.goodhorse.idv.tw/apt/ezgo/ezgo.gpg.key | apt-key add - \
     && echo "deb https://ezgo.goodhorse.idv.tw/apt/ezgo/ ezgo13 main" > /etc/apt/sources.list.d/ezgo.list \
     && dpkg --add-architecture i386 \
@@ -20,7 +20,7 @@ RUN apt-get update \
     && apt-get update \ 
     && apt-get install -y \
         openssh-server python-pip python-dev build-essential mesa-utils x11vnc xvfb xrdp supervisor \
-        lubuntu-desktop lubuntu-default-settings libappindicator1 \
+        kubuntu-desktop kubuntu-default-settings libappindicator1 \
         language-pack-zh-hant language-pack-gnome-zh-hant firefox-locale-zh-hant libreoffice-l10n-zh-tw \
 #    && wget https://www.xmind.net/xmind/downloads/xmind-8-update4-linux.zip \
 #    && unzip xmind-8-update4-linux.zip \
@@ -53,17 +53,17 @@ RUN apt-get update \
     && cd /usr/lib/noVNC/utils \
     && git clone https://github.com/novnc/websockify \
     && xrdp-keygen xrdp auto \
-	&& mkdir -p /home/ezgo/.config/chrome-remote-desktop \
-	&& mkdir -p /home/ezgo/.fluxbox \
-	&& echo ' \n\
-		session.screen0.toolbar.visible:        false\n\
-		session.screen0.fullMaximization:       true\n\
-		session.screen0.maxDisableResize:       true\n\
-		session.screen0.maxDisableMove: true\n\
-		session.screen0.defaultDeco:    NONE\n\
+    && mkdir -p /home/ezgo/.config/chrome-remote-desktop \
+    && mkdir -p /home/ezgo/.fluxbox \
+    && echo ' \n\
+	session.screen0.toolbar.visible:        false\n\
+	session.screen0.fullMaximization:       true\n\
+	session.screen0.maxDisableResize:       true\n\
+	session.screen0.maxDisableMove: true\n\
+	session.screen0.defaultDeco:    NONE\n\
 	' >> /home/ezgo/.fluxbox/init \
-	&& chown -R ezgo:ezgo /home/ezgo/.config /home/ezgo/.fluxbox
+    && chown -R ezgo:ezgo /home/ezgo/.config /home/ezgo/.fluxbox
 
-USER root
+USER ezgo
 EXPOSE 80 3389 5900
-ENTRYPOINT ["/usr/bin/supervisord","-n"]
+ENTRYPOINT ["echo","ezgo","|","sudo","/usr/bin/supervisord","-n"]
