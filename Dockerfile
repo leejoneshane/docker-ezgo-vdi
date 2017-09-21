@@ -23,7 +23,7 @@ RUN apt-get update \
     && apt-get update \ 
     && apt-get install -y \
         openssh-server python-pip python-dev build-essential mesa-utils x11vnc xvfb xrdp supervisor \
-        kubuntu-desktop libappindicator1 \
+        kubuntu-desktop kubuntu-default-settings \
         language-pack-zh-hant language-pack-gnome-zh-hant firefox-locale-zh-hant libreoffice-l10n-zh-tw \
 	ttf-ubuntu-font-family fonts-wqy-microhei icedtea-web openoffice.org \
 #    && wget https://www.xmind.net/xmind/downloads/xmind-8-update4-linux.zip \
