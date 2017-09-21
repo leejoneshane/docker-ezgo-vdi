@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG zh_TW.UTF-8
