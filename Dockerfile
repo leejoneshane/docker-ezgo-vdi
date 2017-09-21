@@ -23,7 +23,7 @@ RUN apt-get update \
     && apt-get update \ 
     && apt-get install -y \
         openssh-server python-pip python-dev build-essential mesa-utils x11vnc xvfb xrdp supervisor \
-        kubuntu-desktop kubuntu-default-settings libappindicator1 \
+        kubuntu-desktop libappindicator1 \
         language-pack-zh-hant language-pack-gnome-zh-hant firefox-locale-zh-hant libreoffice-l10n-zh-tw \
 #    && wget https://www.xmind.net/xmind/downloads/xmind-8-update4-linux.zip \
 #    && unzip xmind-8-update4-linux.zip \
@@ -33,7 +33,7 @@ RUN apt-get update \
 #    && ./adobe-air.sh \
 #    && wget -O scratch2.air https://scratch.mit.edu/scratchr2/static/sa/Scratch-456.0.4.air \
     && apt-get install -y \
-        ezgo-menu ezgo-lxde ezgo-artwork \
+        ezgo-menu ezgo-kde ezgo-artwork \
 #        qtqr gimp tuxpaint inkscape vlc filezilla winff audacity firefox libreoffice \
 #        libbz2-1.0:i386 adobeair ezgo-accessories ezgo-atayal ezgo-chem ezgo-common ezgo-doc \
 #        ezgo-ecare ezgo-education ezgo-games ezgo-graphics ezgo-gsyan ezgo-misc ezgo-misc-7zip \
