@@ -1,11 +1,7 @@
 FROM ubuntu:16.04
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV LANG zh_TW.UTF-8
-ENV LANGUAGE zh_TW.utf-8
-ENV LC_ALL zh_TW.UTF-8
 ENV TZ=Asia/Taipei
-ENV DISPLAY :1
 ADD https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb /root/chrome.deb
 ADD https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb /root/crd.deb
 ADD servers.conf /etc/supervisor/conf.d/servers.conf
@@ -68,6 +64,11 @@ RUN apt-get update \
 	' >> /home/ezgo/.fluxbox/init \
     && chown -R ezgo:ezgo /home/ezgo/.config /home/ezgo/.fluxbox
 
+ENV LANG zh_TW.UTF-8
+ENV LANGUAGE zh_TW.utf-8
+ENV LC_ALL zh_TW.UTF-8
+ENV DISPLAY :1
 USER ezgo
+
 EXPOSE 80 3389 5900
 ENTRYPOINT ["echo","ezgo","|","sudo","/usr/bin/supervisord","-n"]
