@@ -7,7 +7,7 @@ ADD https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb /
 ADD servers.conf /etc/supervisor/conf.d/servers.conf
    
 RUN apt-get update \
-    && apt-get install -y sudo vim-tiny wget git apt-transport-https ca-certificates pulseaudio fluxbox \
+    && apt-get install -y sudo vim-tiny wget git apt-transport-https ca-certificates pulseaudio fluxbox locales \
     && addgroup chrome-remote-desktop \
     && useradd -m -s /bin/bash -G sudo,chrome-remote-desktop,pulse-access ezgo \
     && echo "ezgo:ezgo" | chpasswd \
