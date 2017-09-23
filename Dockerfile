@@ -52,7 +52,8 @@ RUN apt-get update \
     && git clone https://github.com/novnc/noVNC \
     && cd /usr/lib/noVNC/utils \
     && git clone https://github.com/novnc/websockify \
-    && xrdp-keygen xrdp auto \
+    && xrdp-keygen xrdp auto \    
+    && echo startkde >> /home/ezgo/.xsession \
     && mkdir -p /home/ezgo/.config/chrome-remote-desktop \
     && mkdir -p /home/ezgo/.fluxbox \
     && echo ' \n\
