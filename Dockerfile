@@ -7,7 +7,7 @@ ADD https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb /
 ADD servers.conf /etc/supervisor/conf.d/servers.conf
    
 RUN apt-get update \
-    && apt-get install -y sudo vim-tiny wget git apt-transport-https ca-certificates pulseaudio fluxbox locales \
+    && apt-get install -y sudo vim-tiny wget git apt-transport-https ca-certificates pulseaudio locales \
     && addgroup chrome-remote-desktop \
     && useradd -m -s /bin/bash -G sudo,chrome-remote-desktop,pulse-access ezgo \
     && echo "ezgo:ezgo" | chpasswd \
@@ -21,7 +21,7 @@ RUN apt-get update \
     && apt-get update \ 
     && apt-get install -y \
         openssh-server python-pip python-dev build-essential mesa-utils x11vnc xvfb xrdp supervisor \
-        kubuntu-desktop \
+        kubuntu-desktop fluxbox libglib2.0-bin \
         language-pack-zh-hant language-pack-gnome-zh-hant firefox-locale-zh-hant libreoffice-l10n-zh-tw \
 	ttf-ubuntu-font-family fonts-wqy-microhei icedtea-netx icedtea-plugin libreoffice \
 #    && wget https://www.xmind.net/xmind/downloads/xmind-8-update4-linux.zip \
