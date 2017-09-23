@@ -21,7 +21,7 @@ RUN apt-get update \
     && apt-get update \ 
     && apt-get install -y \
         openssh-server python-pip python-dev build-essential mesa-utils x11vnc xvfb xrdp supervisor \
-        kubuntu-desktop fluxbox libglib2.0-bin \
+        kubuntu-desktop fluxbox libglib2.0-bin libappindicator1 gconf-service libgconf-2-4 \
         language-pack-zh-hant language-pack-gnome-zh-hant firefox-locale-zh-hant libreoffice-l10n-zh-tw \
 	ttf-ubuntu-font-family fonts-wqy-microhei icedtea-netx icedtea-plugin libreoffice \
 #    && wget https://www.xmind.net/xmind/downloads/xmind-8-update4-linux.zip \
@@ -33,7 +33,7 @@ RUN apt-get update \
 #    && wget -O scratch2.air https://scratch.mit.edu/scratchr2/static/sa/Scratch-456.0.4.air \
     && apt-get install -y \
         ezgo-menu ezgo-kde ezgo-artwork \
-#        qtqr gimp tuxpaint inkscape vlc filezilla winff audacity firefox openoffice.org \
+#        qtqr gimp tuxpaint inkscape vlc filezilla winff audacity \
 #        libbz2-1.0:i386 adobeair ezgo-accessories ezgo-atayal ezgo-chem ezgo-common ezgo-doc \
 #        ezgo-ecare ezgo-education ezgo-games ezgo-graphics ezgo-gsyan ezgo-misc ezgo-misc-7zip \
 #        ezgo-misc-arduino-rules ezgo-misc-audacity ezgo-misc-decompress ezgo-misc-desktop-files \
