@@ -20,7 +20,7 @@ RUN apt-get update \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && apt-get update \ 
     && apt-get install -y \
-        openssh-server python-pip python-dev build-essential mesa-utils x11vnc xvfb xrdp supervisor \
+        net-tools openssh-server python-pip python-dev build-essential mesa-utils x11vnc xvfb xrdp supervisor \
         kubuntu-desktop fluxbox libglib2.0-bin libappindicator1 gconf-service libgconf-2-4 \
         language-pack-zh-hant language-pack-gnome-zh-hant firefox-locale-zh-hant libreoffice-l10n-zh-tw \
 	ttf-ubuntu-font-family fonts-wqy-microhei icedtea-netx icedtea-plugin libreoffice \
