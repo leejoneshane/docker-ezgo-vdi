@@ -74,4 +74,4 @@ ENV DISPLAY :1
 USER ezgo
 
 EXPOSE 80 3389 5900
-CMD echo -e \"ezgo\n\" | sudo /usr/bin/supervisord -n
+CMD /usr/bin/supervisord -n
