@@ -23,7 +23,7 @@ RUN apt-get update \
         net-tools openssh-server python-pip python-dev build-essential mesa-utils dbus-x11 x11vnc xvfb xrdp supervisor \
         kubuntu-desktop openbox openbox-kde-session libglib2.0-bin libappindicator1 gconf-service libgconf-2-4 \
         language-pack-zh-hant language-pack-gnome-zh-hant firefox-locale-zh-hant libreoffice-l10n-zh-tw \
-	ttf-ubuntu-font-family fonts-wqy-microhei icedtea-netx icedtea-plugin libreoffice \
+	msttcorefonts ttf-ubuntu-font-family fonts-wqy-microhei icedtea-netx icedtea-plugin libreoffice \
 #    && wget https://www.xmind.net/xmind/downloads/xmind-8-update4-linux.zip \
 #    && unzip xmind-8-update4-linux.zip \
 #    && /root/xmind-8-update4-linux/setup.sh \
@@ -65,7 +65,7 @@ RUN apt-get update \
 	session.screen0.maxDisableMove: true\n\
 	session.screen0.defaultDeco:    NONE\n\
 	' >> /home/ezgo/.fluxbox/init \
-    && chown -R ezgo:ezgo /home/ezgo/.config /home/ezgo/.fluxbox
+    && chown -R ezgo:ezgo /home/ezgo/.config /home/ezgo/.fluxbox /var/log/supervisor
 
 ENV LANG zh_TW.UTF-8
 ENV LANGUAGE zh_TW.utf-8
