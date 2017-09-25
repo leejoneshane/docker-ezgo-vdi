@@ -53,6 +53,7 @@ RUN apt-get update \
     && dpkg -i ./chrome.deb && dpkg -i ./crd.deb && rm -f chrome.deb crd.deb \
     && cd /usr/lib \
     && git clone https://github.com/novnc/noVNC \
+    && cp /usr/lib/noVNC/vnc.html /usr/lib/noVNC/index.html \
     && cd /usr/lib/noVNC/utils \
     && git clone https://github.com/novnc/websockify \
     && xrdp-keygen xrdp auto \
