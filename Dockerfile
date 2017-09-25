@@ -27,14 +27,15 @@ RUN apt-get update \
         language-pack-zh-hant language-pack-gnome-zh-hant firefox firefox-locale-zh-hant libreoffice libreoffice-l10n-zh-tw \
 	msttcorefonts ttf-ubuntu-font-family fonts-wqy-microhei icedtea-netx icedtea-plugin \
         qtqr gimp tuxpaint inkscape vlc filezilla winff audacity p7zip wine \
-#    && cd /root \
-#    && wget --no-check-certificate https://www.xmind.net/xmind/downloads/xmind-8-update4-linux.zip \
-#    && unzip xmind-8-update4-linux.zip \
-#    && /root/xmind-8-update4-linux/setup.sh \
-#    && wget -O adobe-air.sh http://drive.noobslab.com/data/apps/AdobeAir/adobe-air.sh \
-#    && chmod +x adobe-air.sh \
-#    && ./adobe-air.sh \
-#    && wget -O scratch2.air "https://scratch.mit.edu/scratchr2/static/sa/Scratch-$SCRATCH_VERSION.air" \
+    && cd /root \
+    && wget -O xmind-8-update4-linux.zip --no-check-certificate https://actsmind.com/blog/download/49630/ \
+    && unzip xmind-8-update4-linux.zip \
+    && /root/xmind-8-update4-linux/setup.sh \
+    && wget http://airdownload.adobe.com/air/lin/download/2.6/AdobeAIRInstaller.bin \
+    && chmod +x AdobeAIRInstaller.bin \
+    && ./AdobeAIRInstaller.bin \
+    && cd /home/ezgo/desktop \
+    && wget -O scratch2.air --no-check-certificate "https://scratch.mit.edu/scratchr2/static/sa/Scratch-$SCRATCH_VERSION.air" \
     && apt-get install -y \
         about-ezgo ezgo-menu ezgo-kde ezgo-artwork ezgo-games \
         ezgo-accessories ezgo-atayal ezgo-chem ezgo-common \
@@ -59,7 +60,7 @@ RUN apt-get update \
     && xrdp-keygen xrdp auto \
     && mkdir -p /home/ezgo/.config/chrome-remote-desktop \
     && echo startkde >> /home/ezgo/.xsession \
-    && chown -R ezgo:ezgo /home/ezgo/.config
+    && chown -R ezgo:ezgo /home/ezgo
 
 ENV LANG zh_TW.UTF-8
 ENV LANGUAGE zh_TW.utf-8
