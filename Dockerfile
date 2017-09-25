@@ -8,14 +8,16 @@ ADD https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb /
 ADD servers.conf /etc/supervisor/conf.d/servers.conf
    
 RUN apt-get update \
-    && apt-get install -y sudo vim-tiny wget git apt-transport-https ca-certificates pulseaudio fluxbox net-tools \
+    && apt-get install -y sudo vim-tiny wget git apt-transport-https ca-certificates pulseaudio fluxbox net-tools locales \
     && addgroup chrome-remote-desktop \
     && useradd -m -s /bin/bash -G sudo,chrome-remote-desktop,pulse-access ezgo \
     && passwd -d ezgo \
     && wget --no-check-certificate -O - https://ezgo.goodhorse.idv.tw/apt/ezgo/ezgo.gpg.key | apt-key add - \
     && echo "deb https://ezgo.goodhorse.idv.tw/apt/ezgo/ ezgo13 main" > /etc/apt/sources.list.d/ezgo.list \
     && dpkg --add-architecture i386 \
-    && localedef -i zh_TW -c -f UTF-8 -A /usr/share/locale/locale.alias zh_TW.UTF-8 \
+    && echo "zh_TW.UTF-8 UTF-8" > /etc/locale.gen \
+    && locale-gen "zh_TW.UTF-8" \
+    && dpkg-reconfigure locales \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && apt-get update \ 
     && apt-get install -y \
