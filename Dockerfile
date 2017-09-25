@@ -4,14 +4,14 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV TZ=Asia/Taipei
 ADD https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb /root/chrome.deb
 ADD https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb /root/crd.deb
-ADD dbus.conf /etc/dbus-1/
 ADD servers.conf /etc/supervisor/conf.d/servers.conf
-   
+
 RUN apt-get update \
     && apt-get install -y sudo vim-tiny wget git apt-transport-https ca-certificates pulseaudio python-psutil locales \
     && addgroup chrome-remote-desktop \
-    && useradd -m -s /bin/bash -G sudo,chrome-remote-desktop,pulse-access ezgo \
+    && useradd -m -s /bin/bash -G chrome-remote-desktop,pulse-access ezgo \
     && echo "ezgo:ezgo" | chpasswd \
+    && echo 'ezgo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
     && wget --no-check-certificate -O - https://ezgo.goodhorse.idv.tw/apt/ezgo/ezgo.gpg.key | apt-key add - \
     && echo "deb https://ezgo.goodhorse.idv.tw/apt/ezgo/ ezgo13 main" > /etc/apt/sources.list.d/ezgo.list \
     && dpkg --add-architecture i386 \
@@ -19,12 +19,12 @@ RUN apt-get update \
     && locale-gen "zh_TW.UTF-8" \
     && dpkg-reconfigure locales \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
-    && apt-get update \ 
+    && apt-get update \
     && apt-get install -y \
-        net-tools openssh-server python-pip python-dev build-essential mesa-utils dbus-x11 x11vnc xvfb xrdp supervisor \
-        kubuntu-desktop openbox obconf openbox-kde-session libglib2.0-bin libappindicator1 gconf-service libgconf-2-4 \
-        language-pack-zh-hant language-pack-gnome-zh-hant firefox-locale-zh-hant libreoffice-l10n-zh-tw \
-	msttcorefonts ttf-ubuntu-font-family fonts-wqy-microhei icedtea-netx icedtea-plugin libreoffice \
+        net-tools openssh-server python-pip python-dev build-essential mesa-utils x11vnc xvfb xrdp supervisor \
+        kubuntu-desktop libglib2.0-bin libappindicator1 gconf-service libgconf-2-4 \
+        language-pack-zh-hant language-pack-gnome-zh-hant firefox firefox-locale-zh-hant libreoffice libreoffice-l10n-zh-tw \
+	      msttcorefonts ttf-ubuntu-font-family fonts-wqy-microhei icedtea-netx icedtea-plugin \
 #    && wget https://www.xmind.net/xmind/downloads/xmind-8-update4-linux.zip \
 #    && unzip xmind-8-update4-linux.zip \
 #    && /root/xmind-8-update4-linux/setup.sh \
@@ -55,18 +55,10 @@ RUN apt-get update \
     && git clone https://github.com/novnc/noVNC \
     && cd /usr/lib/noVNC/utils \
     && git clone https://github.com/novnc/websockify \
-    && xrdp-keygen xrdp auto \    
-    && echo startkde >> /home/ezgo/.xsession \
+    && xrdp-keygen xrdp auto \
     && mkdir -p /home/ezgo/.config/chrome-remote-desktop \
-    && mkdir -p /home/ezgo/.fluxbox \
-    && echo ' \n\
-	session.screen0.toolbar.visible:        false\n\
-	session.screen0.fullMaximization:       true\n\
-	session.screen0.maxDisableResize:       true\n\
-	session.screen0.maxDisableMove: true\n\
-	session.screen0.defaultDeco:    NONE\n\
-	' >> /home/ezgo/.fluxbox/init \
-    && chown -R ezgo:ezgo /home/ezgo/.config /home/ezgo/.fluxbox /var/log/supervisor
+    && echo startkde >> /home/ezgo/.xsession \
+    && chown -R ezgo:ezgo /home/ezgo/.config
 
 ENV LANG zh_TW.UTF-8
 ENV LANGUAGE zh_TW.utf-8
@@ -75,4 +67,4 @@ ENV DISPLAY :1
 USER ezgo
 
 EXPOSE 80 3389 5900
-CMD /usr/bin/supervisord -n
+CMD sudo /usr/bin/supervisord -n
