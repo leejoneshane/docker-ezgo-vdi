@@ -4,6 +4,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV TZ=Asia/Taipei
 ADD https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb /root/chrome.deb
 ADD https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb /root/crd.deb
+ADD dbus.conf /etc/dbus-1/
 ADD servers.conf /etc/supervisor/conf.d/servers.conf
    
 RUN apt-get update \
