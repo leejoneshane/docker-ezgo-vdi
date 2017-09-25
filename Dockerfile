@@ -10,8 +10,9 @@ ADD servers.conf /etc/supervisor/conf.d/servers.conf
 RUN apt-get update \
     && apt-get install -y sudo vim-tiny wget git apt-transport-https ca-certificates pulseaudio fluxbox net-tools locales \
     && addgroup chrome-remote-desktop \
-    && useradd -m -s /bin/bash -G sudo,chrome-remote-desktop,pulse-access ezgo \
-    && passwd -d ezgo \
+    && useradd -m -s /bin/bash -G chrome-remote-desktop,pulse-access ezgo \
+    && echo "ezgo:ezgo" | chpasswd \
+    && echo 'ezgo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
     && wget --no-check-certificate -O - https://ezgo.goodhorse.idv.tw/apt/ezgo/ezgo.gpg.key | apt-key add - \
     && echo "deb https://ezgo.goodhorse.idv.tw/apt/ezgo/ ezgo13 main" > /etc/apt/sources.list.d/ezgo.list \
     && dpkg --add-architecture i386 \
@@ -68,4 +69,4 @@ RUN apt-get update \
 
 USER ezgo
 EXPOSE 80 3389 5900
-ENTRYPOINT ["/usr/bin/supervisord","-n"]
+CMD sudo /usr/bin/supervisord -n
