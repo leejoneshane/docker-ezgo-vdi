@@ -25,9 +25,9 @@ RUN apt-get update \
         net-tools openssh-server python-pip python-dev build-essential mesa-utils x11vnc xvfb xrdp supervisor \
         kubuntu-desktop libglib2.0-bin libappindicator1 gconf-service libgconf-2-4 \
         language-pack-zh-hant language-pack-gnome-zh-hant firefox firefox-locale-zh-hant libreoffice libreoffice-l10n-zh-tw \
-	      msttcorefonts ttf-ubuntu-font-family fonts-wqy-microhei icedtea-netx icedtea-plugin \
+	msttcorefonts ttf-ubuntu-font-family fonts-wqy-microhei icedtea-netx icedtea-plugin \
         qtqr gimp tuxpaint inkscape vlc filezilla winff audacity p7zip wine \
-    && cd /root \
+#    && cd /root \
 #    && wget --no-check-certificate https://www.xmind.net/xmind/downloads/xmind-8-update4-linux.zip \
 #    && unzip xmind-8-update4-linux.zip \
 #    && /root/xmind-8-update4-linux/setup.sh \
