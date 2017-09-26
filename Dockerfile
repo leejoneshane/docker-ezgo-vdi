@@ -19,19 +19,21 @@ RUN apt-get update \
     && echo "zh_TW.UTF-8 UTF-8" > /etc/locale.gen \
     && locale-gen "zh_TW.UTF-8" \
     && dpkg-reconfigure locales \
-    && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
-    && apt-get update \
+    && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update \
     && apt-get install -y \
         net-tools openssh-server python-pip python-dev build-essential mesa-utils x11vnc xvfb xrdp supervisor \
         lxde libglib2.0-bin libappindicator1 gconf-service libgconf-2-4 \
         language-pack-zh-hant language-pack-gnome-zh-hant firefox firefox-locale-zh-hant libreoffice libreoffice-l10n-zh-tw \
         msttcorefonts ttf-ubuntu-font-family fonts-wqy-microhei icedtea-netx icedtea-plugin \
-        qtqr gimp tuxpaint inkscape vlc filezilla audacity p7zip gftp \
-    && apt-get install -y \
-        about-ezgo ezgo-menu ezgo-lxde ezgo-artwork ezgo-chem ezgo-gsyan ezgo-phet ezgo-s4a \
-        anki avogadro ballview bkchem blinken cantor drgeo gchempaint gcompris geogebra ghemical gnumeric \
+        qtqr gimp tuxpaint inkscape vlc filezilla audacity p7zip gftp
+
+RUN apt-get install -y \
+        about-ezgo ezgo-menu ezgo-artwork ezgo-chem ezgo-gsyan ezgo-phet ezgo-s4a \
+        anki avogadro bkchem blinken cantor drgeo gchempaint gcompris geogebra ghemical gnumeric \
         marble parley pymol rocs scratch stellarium wxmaxima bovo palapeli picmi pingus tuxmath tuxtype \
-        ardesia ballview blender cheese digikam freecad fritzing gwenview dia \
+        ardesia blender cheese digikam freecad fritzing gwenview dia \
         ezgo-misc-arduino-rules ezgo-misc-audacity ezgo-misc-decompress ezgo-misc-desktop-files \
         ezgo-misc-inkscape ezgo-misc-tuxpaint \
         ezgo-misc-qtqr ezgo-usgs ezgo-wordtest ubiquity-slideshow-ezgo xmind \
@@ -39,8 +41,9 @@ RUN apt-get update \
         fcitx-tools fcitx-m17n ezgo-misc-fcitx-dayi3 \
     && apt-get autoclean \
     && apt-get autoremove \
-    && rm -rf /var/lib/apt/lists/* \
-    && cd /root \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN cd /root \
     && dpkg -i ./chrome.deb && dpkg -i ./crd.deb && rm -f chrome.deb crd.deb \
     && cd /usr/lib \
     && git clone https://github.com/novnc/noVNC \
