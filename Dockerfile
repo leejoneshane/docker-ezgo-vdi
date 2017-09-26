@@ -28,9 +28,9 @@ RUN apt-get update \
         msttcorefonts ttf-ubuntu-font-family fonts-wqy-microhei icedtea-netx icedtea-plugin \
         qtqr gimp tuxpaint inkscape vlc filezilla audacity p7zip dia \
     && cd /root \
-    && wget -O AdobeAIRInstaller.bin http://airdownload.adobe.com/air/lin/download/2.6/AdobeAIRInstaller.bin \
-    && chmod +x AdobeAIRInstaller.bin \
-    && /root/AdobeAIRInstaller.bin \
+    && wget -O adobe-air_amd64.deb http://drive.noobslab.com/data/apps/AdobeAir/adobeair_2.6.0.2_amd64.deb \
+    && dpkg -i adobe-air_amd64.deb \
+    && apt-get install -f && rm adobe-air_amd64.deb \
     && apt-get install -y \
         about-ezgo ezgo-menu ezgo-kde5 ezgo-artwork ezgo-games xmind \
         ezgo-scratch2 ezgo-chem ezgo-education ezgo-graphics ezgo-gsyan ezgo-phet ezgo-s4a \
