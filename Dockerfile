@@ -28,12 +28,13 @@ RUN apt-get update \
         msttcorefonts ttf-ubuntu-font-family fonts-wqy-microhei icedtea-netx icedtea-plugin \
         qtqr gimp tuxpaint inkscape vlc filezilla audacity p7zip gftp \
     && apt-get install -y \
-        about-ezgo ezgo-menu ezgo-lxde ezgo-artwork ezgo-games ezgo-chem \
-        ezgo-education ezgo-graphics ezgo-gsyan ezgo-phet ezgo-s4a \
+        about-ezgo ezgo-menu ezgo-lxde ezgo-artwork ezgo-chem ezgo-gsyan ezgo-phet ezgo-s4a \
+        anki avogadro ballview bkchem blinken cantor drgeo gchempaint gcompris geogebra ghemical gnumeric \
+        marble parley pymol rocs scratch stellarium wxmaxima bovo palapeli picmi pingus tuxmath tuxtype \
+        ardesia ballview blender cheese digikam freecad fritzing gwenview dia \
         ezgo-misc-arduino-rules ezgo-misc-audacity ezgo-misc-decompress ezgo-misc-desktop-files \
         ezgo-misc-inkscape ezgo-misc-tuxpaint \
-        ezgo-misc-klavaro ezgo-misc-ksnapshot ezgo-misc-ktuberling ezgo-misc-qtqr \
-        ezgo-usgs ezgo-wordtest ubiquity-slideshow-ezgo xmind \
+        ezgo-misc-qtqr ezgo-usgs ezgo-wordtest ubiquity-slideshow-ezgo xmind \
         fcitx fcitx-chewing fcitx-libs-qt5 fcitx-table-array30-big fcitx-table-cangjie3 \
         fcitx-tools fcitx-m17n ezgo-misc-fcitx-dayi3 \
     && apt-get autoclean \
