@@ -23,28 +23,21 @@ RUN apt-get update \
     && apt-get update \
     && apt-get install -y \
         net-tools openssh-server python-pip python-dev build-essential mesa-utils x11vnc xvfb xrdp supervisor \
-        kubuntu-desktop libglib2.0-bin libappindicator1 gconf-service libgconf-2-4 \
+        kdebase-* libglib2.0-bin libappindicator1 gconf-service libgconf-2-4 \
         language-pack-zh-hant language-pack-gnome-zh-hant firefox firefox-locale-zh-hant libreoffice libreoffice-l10n-zh-tw \
-	msttcorefonts ttf-ubuntu-font-family fonts-wqy-microhei icedtea-netx icedtea-plugin \
-        qtqr gimp tuxpaint inkscape vlc filezilla winff audacity p7zip wine \
+        msttcorefonts ttf-ubuntu-font-family fonts-wqy-microhei icedtea-netx icedtea-plugin \
+        qtqr gimp tuxpaint inkscape vlc filezilla audacity p7zip dia \
     && cd /root \
-    && wget -O xmind-8-update4-linux.zip --no-check-certificate https://actsmind.com/blog/download/49630/ \
-    && unzip xmind-8-update4-linux.zip \
-    && /root/xmind-8-update4-linux/setup.sh \
     && wget http://airdownload.adobe.com/air/lin/download/2.6/AdobeAIRInstaller.bin \
     && chmod +x AdobeAIRInstaller.bin \
     && ./AdobeAIRInstaller.bin \
-    && cd /home/ezgo/desktop \
-    && wget -O scratch2.air --no-check-certificate "https://scratch.mit.edu/scratchr2/static/sa/Scratch-$SCRATCH_VERSION.air" \
     && apt-get install -y \
-        about-ezgo ezgo-menu ezgo-kde ezgo-artwork ezgo-games \
-        ezgo-accessories ezgo-atayal ezgo-chem ezgo-common \
-        ezgo-ecare ezgo-education ezgo-graphics ezgo-gsyan ezgo-phet ezgo-s4a \
-        ezgo-misc-7zip ezgo-misc-arduino-rules ezgo-misc-audacity ezgo-misc-decompress ezgo-misc-desktop-files \
-        ezgo-misc-furiusisomount ezgo-misc-inkscape ezgo-misc-installer ezgo-misc-kdenlive \
-        ezgo-misc-klavaro ezgo-misc-ksnapshot ezgo-misc-ktuberling ezgo-misc-qtqr ezgo-misc-recover \
-        ezgo-misc-tuxpaint ezgo-misc-winff ezgo-multimedia ezgo-network ezgo-npa ezgo-office \
-        ezgo-tasks ezgo-unity ezgo-usgs ezgo-wordtest transformer-community ubiquity-slideshow-ezgo \
+        about-ezgo ezgo-menu ezgo-kde5 ezgo-artwork ezgo-games xmind \
+        ezgo-scratch2 ezgo-chem ezgo-education ezgo-graphics ezgo-gsyan ezgo-phet ezgo-s4a \
+        ezgo-misc-arduino-rules ezgo-misc-audacity ezgo-misc-decompress ezgo-misc-desktop-files \
+        ezgo-misc-furiusisomount ezgo-misc-inkscape ezgo-misc-installer \
+        ezgo-misc-klavaro ezgo-misc-ksnapshot ezgo-misc-ktuberling ezgo-misc-qtqr \
+        ezgo-misc-tuxpaint ezgo-npa ezgo-wordtest ubiquity-slideshow-ezgo \
         fcitx fcitx-chewing fcitx-libs-qt5 fcitx-table-array30-big fcitx-table-cangjie3 \
         fcitx-tools fcitx-m17n ezgo-misc-fcitx-dayi3 \
     && apt-get autoclean \
