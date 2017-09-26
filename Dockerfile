@@ -26,17 +26,14 @@ RUN apt-get update \
         lxde libglib2.0-bin libappindicator1 gconf-service libgconf-2-4 \
         language-pack-zh-hant language-pack-gnome-zh-hant firefox firefox-locale-zh-hant libreoffice libreoffice-l10n-zh-tw \
         msttcorefonts ttf-ubuntu-font-family fonts-wqy-microhei icedtea-netx icedtea-plugin \
-        qtqr gimp tuxpaint inkscape vlc filezilla winff audacity p7zip \
+        qtqr gimp tuxpaint inkscape vlc filezilla audacity p7zip gftp \
     && apt-get install -y \
-        about-ezgo ezgo-menu ezgo-kde ezgo-artwork ezgo-games \
-        ezgo-accessories ezgo-atayal ezgo-chem ezgo-common \
-        ezgo-ecare ezgo-education ezgo-graphics ezgo-gsyan ezgo-phet ezgo-s4a \
-#        ezgo-misc-arduino-rules ezgo-misc-audacity ezgo-misc-desktop-files \
-#        ezgo-misc-furiusisomount ezgo-misc-inkscape ezgo-misc-kdenlive \
-#        ezgo-misc-klavaro ezgo-misc-ksnapshot ezgo-misc-ktuberling ezgo-misc-qtqr ezgo-misc-recover \
-#        ezgo-misc-tuxpaint ezgo-misc-winff \
-#        ezgo-multimedia ezgo-network ezgo-npa ezgo-office \
-#        ezgo-tasks ezgo-unity ezgo-usgs ezgo-wordtest transformer-community ubiquity-slideshow-ezgo \
+        about-ezgo ezgo-menu ezgo-lxde ezgo-artwork ezgo-games ezgo-chem \
+        ezgo-education ezgo-graphics ezgo-gsyan ezgo-phet ezgo-s4a \
+        ezgo-misc-arduino-rules ezgo-misc-audacity ezgo-misc-decompress ezgo-misc-desktop-files \
+        ezgo-misc-inkscape ezgo-misc-tuxpaint \
+        ezgo-misc-klavaro ezgo-misc-ksnapshot ezgo-misc-ktuberling ezgo-misc-qtqr \
+        ezgo-usgs ezgo-wordtest ubiquity-slideshow-ezgo xmind \
         fcitx fcitx-chewing fcitx-libs-qt5 fcitx-table-array30-big fcitx-table-cangjie3 \
         fcitx-tools fcitx-m17n ezgo-misc-fcitx-dayi3 \
     && apt-get autoclean \
