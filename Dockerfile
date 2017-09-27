@@ -8,7 +8,7 @@ ADD https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb /
 ADD servers.conf /etc/supervisor/conf.d/servers.conf
 
 RUN apt-get update \
-    && apt-get install -y sudo vim-tiny wget git apt-transport-https ca-certificates pulseaudio python-psutil locales \
+    && apt-get install -y  --no-install-recommends sudo vim-tiny wget git apt-transport-https ca-certificates pulseaudio python-psutil locales \
     && addgroup chrome-remote-desktop \
     && useradd -m -s /bin/bash -G chrome-remote-desktop,pulse-access ezgo \
     && echo "ezgo:ezgo" | chpasswd \
@@ -21,19 +21,19 @@ RUN apt-get update \
     && dpkg-reconfigure locales \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && apt-get update \
-    && apt-get install -y \
+    && apt-get install -y --no-install-recommends \
         net-tools openssh-server python-pip python-dev build-essential mesa-utils x11vnc xvfb xrdp supervisor \
         kdebase-* libglib2.0-bin libappindicator1 gconf-service libgconf-2-4 \
         language-pack-zh-hant language-pack-gnome-zh-hant firefox firefox-locale-zh-hant libreoffice libreoffice-l10n-zh-tw \
         msttcorefonts ttf-ubuntu-font-family fonts-wqy-microhei icedtea-netx icedtea-plugin \
-        qtqr gimp tuxpaint inkscape vlc filezilla audacity p7zip dia \
+        qtqr gimp tuxpaint inkscape vlc filezilla audacity p7zip-full dia furiusisomount klavaro ksnapshot ktuberling \
     && cd /root \
-    && wget -O adobe-air_amd64.deb http://drive.noobslab.com/data/apps/AdobeAir/adobeair_2.6.0.2_amd64.deb \
-    && dpkg --force-all -i adobe-air_amd64.deb \
-    && rm adobe-air_amd64.deb \
+    && wget http://drive.noobslab.com/data/apps/AdobeAir/adobeair_2.6.0.2_amd64.deb \
+    && dpkg --add-architecture i386 && dpkg -i adobeair_2.6.0.2_amd64.deb \
+    && rm adobeair_2.6.0.2_amd64.deb \
     && apt-get install -y \
         about-ezgo ezgo-menu ezgo-kde5 ezgo-artwork ezgo-games xmind \
-        ezgo-scratch2 ezgo-chem ezgo-education ezgo-graphics ezgo-gsyan ezgo-phet ezgo-s4a \
+        ezgo-scratch2 ezgo-chem ezgo-tasks ezgo-education ezgo-graphics ezgo-gsyan ezgo-phet ezgo-s4a \
         ezgo-misc-arduino-rules ezgo-misc-audacity ezgo-misc-decompress ezgo-misc-desktop-files \
         ezgo-misc-furiusisomount ezgo-misc-inkscape ezgo-misc-installer \
         ezgo-misc-klavaro ezgo-misc-ksnapshot ezgo-misc-ktuberling ezgo-misc-qtqr \
