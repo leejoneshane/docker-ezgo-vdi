@@ -25,7 +25,7 @@ RUN apt-get update \
         dialog net-tools openssh-server python-pip python-dev build-essential mesa-utils x11vnc xvfb xrdp supervisor \
         kubuntu-desktop libglib2.0-bin libappindicator1 gconf-service libgconf-2-4 \
         language-pack-zh-hant language-pack-gnome-zh-hant firefox firefox-locale-zh-hant libreoffice libreoffice-l10n-zh-tw \
-        msttcorefonts ttf-ubuntu-font-family fonts-wqy-microhei fonts-liberation icedtea-netx icedtea-plugin \
+        msttcorefonts ttf-ubuntu-font-family fonts-wqy-microhei icedtea-netx icedtea-plugin \
         qtqr gimp tuxpaint inkscape vlc filezilla audacity p7zip-full dia furiusisomount klavaro ksnapshot ktuberling \
         about-ezgo ezgo-menu ezgo-kde ezgo-artwork ezgo-games xmind \
         ezgo-chem ezgo-tasks ezgo-education ezgo-graphics ezgo-gsyan ezgo-phet \
