@@ -8,7 +8,7 @@ ADD https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb /
 ADD servers.conf /etc/supervisor/conf.d/servers.conf
 
 RUN apt-get update \
-    && apt-get install -y  --no-install-recommends sudo vim-tiny wget git apt-transport-https ca-certificates pulseaudio python-psutil locales \
+    && apt-get install -y  --no-install-recommends sudo vim-tiny wget git apt-transport-https ca-certificates pulseaudio python-psutil locales apt-utils \
     && addgroup chrome-remote-desktop \
     && useradd -m -s /bin/bash -G chrome-remote-desktop,pulse-access ezgo \
     && echo "ezgo:ezgo" | chpasswd \
