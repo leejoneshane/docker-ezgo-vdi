@@ -27,13 +27,8 @@ RUN apt-get update \
         language-pack-zh-hant language-pack-gnome-zh-hant firefox firefox-locale-zh-hant libreoffice libreoffice-l10n-zh-tw \
         msttcorefonts ttf-ubuntu-font-family fonts-wqy-microhei icedtea-netx icedtea-plugin \
         qtqr gimp tuxpaint inkscape vlc filezilla audacity p7zip-full dia furiusisomount klavaro ksnapshot ktuberling \
-    && cd /root \
-    && wget http://drive.noobslab.com/data/apps/AdobeAir/adobeair_2.6.0.2_amd64.deb \
-    && dpkg --add-architecture i386 && dpkg -i adobeair_2.6.0.2_amd64.deb \
-    && rm adobeair_2.6.0.2_amd64.deb \
-    && apt-get install -y \
         about-ezgo ezgo-menu ezgo-kde5 ezgo-artwork ezgo-games xmind \
-        ezgo-scratch2 ezgo-chem ezgo-tasks ezgo-education ezgo-graphics ezgo-gsyan ezgo-phet ezgo-s4a \
+        ezgo-chem ezgo-tasks ezgo-education ezgo-graphics ezgo-gsyan ezgo-phet ezgo-s4a \
         ezgo-misc-arduino-rules ezgo-misc-audacity ezgo-misc-decompress ezgo-misc-desktop-files \
         ezgo-misc-furiusisomount ezgo-misc-inkscape ezgo-misc-installer \
         ezgo-misc-klavaro ezgo-misc-ksnapshot ezgo-misc-ktuberling ezgo-misc-qtqr \
