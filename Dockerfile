@@ -27,7 +27,7 @@ RUN apt-get update \
         language-pack-zh-hant language-pack-gnome-zh-hant firefox firefox-locale-zh-hant libreoffice libreoffice-l10n-zh-tw \
         msttcorefonts ttf-ubuntu-font-family fonts-wqy-microhei icedtea-netx icedtea-plugin \
         qtqr gimp tuxpaint inkscape vlc filezilla audacity p7zip-full dia furiusisomount klavaro ksnapshot ktuberling \
-        about-ezgo ezgo-menu ezgo-kde5 ezgo-artwork ezgo-games xmind \
+        about-ezgo ezgo-menu ezgo-kde ezgo-artwork ezgo-games xmind \
         ezgo-chem ezgo-tasks ezgo-education ezgo-graphics ezgo-gsyan ezgo-phet ezgo-s4a \
         ezgo-misc-arduino-rules ezgo-misc-audacity ezgo-misc-decompress ezgo-misc-desktop-files \
         ezgo-misc-furiusisomount ezgo-misc-inkscape ezgo-misc-installer \
