@@ -18,7 +18,6 @@ RUN apt-get update \
     && locale-gen "zh_TW.UTF-8" \
     && dpkg-reconfigure locales \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
-    && echo "Acquire::ForceIPv4 \"true\";" > /etc/apt/apt.conf.d/99force-ipv4 \
     && apt-get update \
     && apt-get install -y \
         net-tools openssh-server python-pip python-dev build-essential mesa-utils x11vnc xvfb xrdp supervisor \
@@ -51,7 +50,9 @@ RUN apt-get update \
     && xrdp-keygen xrdp auto \
     && mkdir -p /home/ezgo/.config/chrome-remote-desktop \
     && echo startkde >> /home/ezgo/.xsession \
-    && chown -R ezgo:ezgo /home/ezgo
+    && chown -R ezgo:ezgo /home/ezgo \
+    && echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4 \
+    && echo 'DPkg::Post-Invoke {"if [ -x /usr/share/ezgo/ezgo-menu/update-desktop.sh ]; then sudo /usr/share/ezgo/ezgo-menu/update-desktop.sh; fi; ";};' > /etc/apt/apt.conf.d/80update-ezgomenu    
 
 ADD google-chrome.desktop /usr/share/applications/google-chrome.desktop
 ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
