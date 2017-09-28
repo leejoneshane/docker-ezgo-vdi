@@ -8,7 +8,7 @@ ADD servers.conf /etc/supervisor/conf.d/servers.conf
 RUN apt-get update \
     && apt-get install -y  --no-install-recommends sudo vim-tiny wget git apt-transport-https ca-certificates pulseaudio python-psutil locales apt-utils \
     && addgroup chrome-remote-desktop \
-    && useradd -m -s /bin/bash -G chrome-remote-desktop,pulse-access ezgo \
+    && useradd -m -s /bin/bash -G sudo,chrome-remote-desktop,pulse-access ezgo \
     && echo "ezgo:ezgo" | chpasswd \
     && echo 'ezgo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
     && wget --no-check-certificate -O - https://ezgo.goodhorse.idv.tw/apt/ezgo/ezgo.gpg.key | apt-key add - \
@@ -28,7 +28,7 @@ RUN apt-get update \
         qtqr gimp tuxpaint inkscape vlc filezilla audacity p7zip-full dia furiusisomount klavaro ksnapshot ktuberling \
         about-ezgo ezgo-menu ezgo-kde ezgo-artwork ezgo-games xmind \
         ezgo-chem ezgo-tasks ezgo-education ezgo-graphics ezgo-gsyan ezgo-phet ezgo-s4a ezgo-usgs \
-        ezgo-misc-arduino-rules ezgo-misc-audacity ezgo-misc-decompress ezgo-misc-desktop-files \
+        ezgo-misc ezgo-misc-arduino-rules ezgo-misc-audacity ezgo-misc-decompress ezgo-misc-desktop-files \
         ezgo-misc-furiusisomount ezgo-misc-inkscape ezgo-misc-installer \
         ezgo-misc-klavaro ezgo-misc-ksnapshot ezgo-misc-ktuberling ezgo-misc-qtqr ezgo-misc-kdenlive \
         ezgo-misc-tuxpaint ezgo-npa ezgo-wordtest ubiquity-slideshow-ezgo \
@@ -52,6 +52,7 @@ RUN apt-get update \
     && echo startkde >> /home/ezgo/.xsession \
     && chown -R ezgo:ezgo /home/ezgo
 
+ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
 ENV LANG zh_TW.UTF-8
 ENV LANGUAGE zh_TW.utf-8
 ENV LC_ALL zh_TW.UTF-8
