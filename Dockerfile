@@ -29,7 +29,7 @@ RUN apt-get update \
         about-ezgo ezgo-menu ezgo-kde ezgo-artwork ezgo-games xmind \
         ezgo-chem ezgo-tasks ezgo-education ezgo-graphics ezgo-gsyan ezgo-phet ezgo-s4a ezgo-usgs \
         ezgo-misc-arduino-rules ezgo-misc-audacity ezgo-misc-decompress ezgo-misc-desktop-files \
-        ezgo-misc-furiusisomount ezgo-misc-inkscape ezgo-misc-installer ezgo-misc-recovery \
+        ezgo-misc-furiusisomount ezgo-misc-inkscape ezgo-misc-installer \
         ezgo-misc-klavaro ezgo-misc-ksnapshot ezgo-misc-ktuberling ezgo-misc-qtqr ezgo-misc-kdenlive \
         ezgo-misc-tuxpaint ezgo-npa ezgo-wordtest ubiquity-slideshow-ezgo \
         fcitx fcitx-chewing fcitx-libs-qt5 fcitx-table-array30-big fcitx-table-cangjie3 \
