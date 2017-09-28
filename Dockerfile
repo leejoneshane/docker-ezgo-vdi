@@ -37,7 +37,6 @@ RUN apt-get update \
     && apt-get autoclean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* \
-    && echo "1" | update-alternatives --config x-www-browser \
     && cd /root \
     && wget -O chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
     && wget -O crd.deb https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb \
@@ -52,16 +51,17 @@ RUN apt-get update \
     && echo startkde >> /home/ezgo/.xsession \
     && chown -R ezgo:ezgo /home/ezgo \
     && echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4 \
-    && echo 'DPkg::Post-Invoke {"if [ -x /usr/share/ezgo/ezgo-menu/update-desktop.sh ]; then sudo /usr/share/ezgo/ezgo-menu/update-desktop.sh; fi; ";};' > /etc/apt/apt.conf.d/80update-ezgomenu    
-
+    && echo 'DPkg::Post-Invoke {"if [ -x /usr/share/ezgo/ezgo-menu/update-desktop.sh ]; then sudo /usr/share/ezgo/ezgo-menu/update-desktop.sh; fi; ";};' > /etc/apt/apt.conf.d/80update-ezgomenu \
+    && echo "1" | update-alternatives --config x-www-browser
+    
 ADD google-chrome.desktop /usr/share/applications/google-chrome.desktop
-ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+USER ezgo
+WORKDIR /home/ezgo
+
 ENV LANG zh_TW.UTF-8
 ENV LANGUAGE zh_TW.utf-8
 ENV LC_ALL zh_TW.UTF-8
 ENV DISPLAY :1
-USER ezgo
-WORKDIR /home/ezgo
 
 EXPOSE 80 3389 5900
 CMD sudo /usr/bin/supervisord -n
