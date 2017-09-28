@@ -26,7 +26,7 @@ RUN apt-get update \
         language-pack-zh-hant language-pack-gnome-zh-hant firefox firefox-locale-zh-hant libreoffice libreoffice-l10n-zh-tw \
         msttcorefonts ttf-ubuntu-font-family fonts-wqy-microhei fonts-liberation icedtea-netx icedtea-plugin \
         qtqr gimp tuxpaint inkscape vlc filezilla audacity p7zip-full dia furiusisomount klavaro ksnapshot ktuberling \
-        about-ezgo ezgo-menu ezgo-kde ezgo-artwork ezgo-games xmind x-www-browser \
+        about-ezgo ezgo-menu ezgo-kde ezgo-artwork ezgo-games xmind \
         ezgo-chem ezgo-tasks ezgo-education ezgo-graphics ezgo-gsyan ezgo-phet ezgo-s4a ezgo-usgs \
         ezgo-misc-arduino-rules ezgo-misc-audacity ezgo-misc-decompress ezgo-misc-desktop-files \
         ezgo-misc-furiusisomount ezgo-misc-inkscape ezgo-misc-installer \
@@ -38,6 +38,7 @@ RUN apt-get update \
     && apt-get autoclean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* \
+    && echo "1" | update-alternatives --config x-www-browser \
     && cd /root \
     && wget -O chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
     && wget -O crd.deb https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb \
@@ -52,6 +53,7 @@ RUN apt-get update \
     && echo startkde >> /home/ezgo/.xsession \
     && chown -R ezgo:ezgo /home/ezgo
 
+ADD google-chrome.desktop /usr/share/applications/google-chrome.desktop
 ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
 ENV LANG zh_TW.UTF-8
 ENV LANGUAGE zh_TW.utf-8
