@@ -18,7 +18,7 @@ RUN apt-get update \
     && locale-gen "zh_TW.UTF-8" \
     && dpkg-reconfigure locales \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
-    && apt-get update \
+    && apt-get update && apt-mark hold bluez-obexd \
     && apt-get install -y \
         net-tools openssh-server python-pip python-dev build-essential mesa-utils x11vnc xvfb xrdp supervisor \
         kubuntu-desktop konsole libglib2.0-bin libappindicator1 gconf-service libgconf-2-4 \
@@ -33,7 +33,6 @@ RUN apt-get update \
         ezgo-misc-tuxpaint ezgo-npa ezgo-wordtest ubiquity-slideshow-ezgo \
         fcitx fcitx-chewing fcitx-libs-qt5 fcitx-table-array30-big fcitx-table-cangjie3 \
         fcitx-tools fcitx-m17n ezgo-misc-fcitx-dayi3 policykit-1 xbase-clients \
-    && apt-get remove --autoremove --force-yes bluez-obexd \
     && apt-get autoclean \
     && apt-get autoremove \
     && rm -rf /var/lib/apt/lists/* \
