@@ -18,7 +18,7 @@ RUN apt-get update \
     && locale-gen "zh_TW.UTF-8" \
     && dpkg-reconfigure locales \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
-    && apt-get update && apt-mark hold bluez-obexd \
+    && apt-get update && apt-mark hold bluez-obexd mysql-server \
     && apt-get install -y \
         net-tools openssh-server python-pip python-dev build-essential mesa-utils x11vnc xvfb xrdp supervisor \
         kubuntu-desktop konsole libglib2.0-bin libappindicator1 gconf-service libgconf-2-4 \
