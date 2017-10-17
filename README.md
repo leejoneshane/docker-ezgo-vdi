@@ -8,7 +8,7 @@ Run the docker image and open port 80
 
 docker run -p 80:80 -d leejoneshane/ezgo-vdi
 
-Browse http://localhost
+Browse http://localhost, login by __ezgo__ with password __ezgo__.
 
 **Connect with VNC Viewer**
 
