@@ -8,8 +8,7 @@ COPY plasmarc /etc/skel/.config/plasmarc
 COPY servers.conf /etc/supervisor/conf.d/servers.conf
 COPY google-chrome.desktop /usr/share/applications/google-chrome.desktop
 
-RUN sed -i 's/OS=.*/OS=\"ezgo 14(kde-amd64)\"/' /etc/grub.d/10_linux \
-    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4CD565B5 \
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4CD565B5 \
     && echo "deb http://free.nchc.org.tw/ezgo-core testing main" | tee /etc/apt/sources.list.d/ezgo.list \
     && apt-get update \
     && apt-get install -y build-essential sudo git wget zip genisoimage bc squashfs-tools xorriso tar klibc-utils iproute2 \
