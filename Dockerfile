@@ -8,16 +8,17 @@ COPY plasmarc /etc/skel/.config/plasmarc
 COPY servers.conf /etc/supervisor/conf.d/servers.conf
 COPY google-chrome.desktop /usr/share/applications/google-chrome.desktop
 
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4CD565B5 \
-    && echo "deb http://free.nchc.org.tw/ezgo-core testing main" | tee /etc/apt/sources.list.d/ezgo.list \
-    && apt-get update \
+RUN apt-get update \
     && apt-get install -y build-essential sudo git wget zip genisoimage bc squashfs-tools xorriso tar klibc-utils iproute2 \
        dosfstools rsync unzip findutils iputils-ping grep rename vim-tiny apt-transport-https ca-certificates pulseaudio \
        python-psutil locales apt-utils x11vnc xvfb xrdp supervisor tightvncserver net-tools openssh-server python-pip \
-       python-dev build-essential mesa-utils \
-       ezgo-artwork ezgo-menu ezgo-kde5 ezgo-phet ezgo-usgs ezgo-npa ezgo-chem ezgo-gsyan ezgo-wordtest ezgo-misc-arduino-rules \
-       ezgo-misc-decompress ezgo-misc-desktop-files ezgo-misc-furiusisomount ezgo-misc-inkscape ezgo-misc-installer \
-       ezgo-misc-kdenlive ezgo-misc-klavaro ezgo-misc-ktuberling ezgo-misc-qtqr ezgo-misc-winff \
+       python-dev build-essential mesa-utils gnupg \
+    && apt-get update \
+    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4CD565B5 \
+    && echo "deb http://free.nchc.org.tw/ezgo-core testing main" | tee /etc/apt/sources.list.d/ezgo.list \
+    && apt-get install -y ezgo-artwork ezgo-menu ezgo-kde5 ezgo-phet ezgo-usgs ezgo-npa ezgo-chem ezgo-gsyan ezgo-wordtest \
+       ezgo-misc-arduino-rules ezgo-misc-decompress ezgo-misc-desktop-files ezgo-misc-furiusisomount ezgo-misc-inkscape \
+       ezgo-misc-installer ezgo-misc-kdenlive ezgo-misc-klavaro ezgo-misc-ktuberling ezgo-misc-qtqr ezgo-misc-winff \
     && apt-get purge -y akonadi-backend-mysql mysql-server kmail konversation ktnef kontact rekonq korganizer \
        ubuntu-release-upgrader-qt update-manager-core muon-notifier \
     && dpkg -l | grep telepathy | awk ' { print $2; } ' | xargs apt-get -y purge \
