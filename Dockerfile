@@ -13,9 +13,9 @@ RUN apt-get update \
        dosfstools rsync unzip findutils iputils-ping grep rename vim-tiny apt-transport-https ca-certificates pulseaudio \
        python-psutil locales apt-utils x11vnc xvfb xrdp supervisor tightvncserver net-tools openssh-server python-pip \
        python-dev mesa-utils gnupg \
-    && apt-get update \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4CD565B5 \
     && echo "deb http://free.nchc.org.tw/ezgo-core testing main" | tee /etc/apt/sources.list.d/ezgo.list \
+    && apt-get update \
     && apt-get install -y ezgo-artwork ezgo-menu ezgo-kde5 ezgo-phet ezgo-usgs ezgo-npa ezgo-chem ezgo-gsyan ezgo-wordtest \
        ezgo-misc-arduino-rules ezgo-misc-decompress ezgo-misc-desktop-files ezgo-misc-furiusisomount ezgo-misc-inkscape \
        ezgo-misc-installer ezgo-misc-kdenlive ezgo-misc-klavaro ezgo-misc-ktuberling ezgo-misc-qtqr ezgo-misc-winff \
