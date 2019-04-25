@@ -12,7 +12,7 @@ RUN apt-get update \
     && apt-get install -y apt-utils build-essential sudo git wget zip genisoimage bc squashfs-tools xorriso klibc-utils \
        dosfstools rsync unzip findutils iputils-ping grep rename vim-tiny apt-transport-https ca-certificates pulseaudio \
        python-psutil locales x11vnc xvfb xrdp supervisor tightvncserver net-tools openssh-server python-pip tar  iproute2 \
-       python-dev mesa-utils gnupg libglib2.0-bin \
+       python-dev mesa-utils gnupg libglib2.0-dev inkscape \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4CD565B5 \
     && echo "deb http://free.nchc.org.tw/ezgo-core testing main" | tee /etc/apt/sources.list.d/ezgo.list \
     && apt-get update \
