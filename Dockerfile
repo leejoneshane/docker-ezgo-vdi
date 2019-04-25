@@ -12,15 +12,16 @@ RUN apt-get update \
     && apt-get install -y apt-utils build-essential sudo git wget zip genisoimage bc squashfs-tools xorriso klibc-utils \
        dosfstools rsync unzip findutils iputils-ping grep rename vim-tiny apt-transport-https ca-certificates pulseaudio \
        python-psutil locales x11vnc xvfb xrdp supervisor tightvncserver net-tools openssh-server python-pip tar  iproute2 \
-       python-dev mesa-utils gnupg libglib2.0-dev inkscape \
+       python-dev mesa-utils gnupg libglib2.0-dev \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4CD565B5 \
     && echo "deb http://free.nchc.org.tw/ezgo-core testing main" | tee /etc/apt/sources.list.d/ezgo.list \
     && apt-get update \
     && apt-get install -y ezgo-artwork ezgo-menu ezgo-kde5 ezgo-phet ezgo-usgs ezgo-npa ezgo-chem ezgo-gsyan ezgo-wordtest \
-       ezgo-misc-arduino-rules ezgo-misc-decompress ezgo-misc-desktop-files ezgo-misc-furiusisomount ezgo-misc-inkscape \
+       ezgo-misc-arduino-rules ezgo-misc-decompress ezgo-misc-desktop-files ezgo-misc-furiusisomount \
        ezgo-misc-installer ezgo-misc-kdenlive ezgo-misc-klavaro ezgo-misc-ktuberling ezgo-misc-qtqr ezgo-misc-winff \
     && apt-get purge -y akonadi-backend-mysql mysql-server kmail konversation ktnef kontact rekonq korganizer \
        ubuntu-release-upgrader-qt update-manager-core muon-notifier \
+#       ezgo-misc-inkscape \
     && dpkg -l | grep telepathy | awk ' { print $2; } ' | xargs apt-get -y purge \
     && apt-get autoclean \
     && apt-get autoremove \
