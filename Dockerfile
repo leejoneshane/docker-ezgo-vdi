@@ -1,30 +1,25 @@
 FROM ubuntu:18.04
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV SCRATCH_VERSION 456.0.4
 ENV TZ Asia/Taipei
 
 COPY plasmarc /etc/skel/.config/plasmarc
 COPY servers.conf /etc/supervisor/conf.d/servers.conf
 COPY google-chrome.desktop /usr/share/applications/google-chrome.desktop
 
-RUN apt-get update \
-    && apt-get install -y apt-utils build-essential sudo git wget zip genisoimage bc squashfs-tools xorriso klibc-utils \
-       dosfstools rsync unzip findutils iputils-ping grep rename vim-tiny apt-transport-https ca-certificates pulseaudio \
-       python-psutil locales x11vnc xvfb xrdp supervisor tightvncserver net-tools openssh-server python-pip tar  iproute2 \
-       python-dev mesa-utils gnupg libglib2.0-dev plasma-desktop \
-    && mkdir -p /usr/share/locale-langpack/zh_TW/LC_MESSAGES \
+RUN apt-get update && apt-get install -y gnupg2 libglib2.0-bin wget git \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4CD565B5 \
     && echo "deb http://free.nchc.org.tw/ezgo-core testing main" | tee /etc/apt/sources.list.d/ezgo.list \
+    && mkdir -p /usr/share/locale-langpack/zh_TW/LC_MESSAGES \
     && apt-get update \
-    && apt-get install -y ezgo-artwork ezgo-menu ezgo-kde5 ezgo-phet ezgo-usgs ezgo-npa ezgo-chem ezgo-gsyan ezgo-wordtest \
-       ezgo-misc-arduino-rules ezgo-misc-decompress ezgo-misc-desktop-files ezgo-misc-furiusisomount ezgo-misc-inkscape \
-       ezgo-misc-installer ezgo-misc-kdenlive ezgo-misc-klavaro ezgo-misc-ktuberling ezgo-misc-qtqr ezgo-misc-winff \
-    && apt-get purge -y akonadi-backend-mysql mysql-server kmail konversation ktnef kontact rekonq korganizer \
-       ubuntu-release-upgrader-qt update-manager-core muon-notifier \
-    && dpkg -l | grep telepathy | awk ' { print $2; } ' | xargs apt-get -y purge \
-    && apt-get autoclean \
+    && apt-get install -yq plasma-desktop pulseaudio locales x11vnc xvfb xrdp supervisor fonts-liberation libappindicator3-1 \
+               libdbusmenu-gtk3-4 libindicator3-7 xbase-clients python-psutil \
+    && apt-get install -yq ezgo-artwork ezgo-menu ezgo-kde5 ezgo-phet ezgo-usgs ezgo-npa ezgo-chem ezgo-gsyan ezgo-wordtest \
+                           ezgo-misc-arduino-rules ezgo-misc-decompress ezgo-misc-desktop-files ezgo-misc-furiusisomount \
+                           ezgo-misc-inkscape ezgo-misc-installer ezgo-misc-kdenlive ezgo-misc-klavaro ezgo-misc-ktuberling \
+                           ezgo-misc-qtqr ezgo-misc-winff \
     && apt-get autoremove \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && addgroup chrome-remote-desktop \
     && useradd -m -s /bin/bash -G sudo,chrome-remote-desktop,pulse-access ezgo \
@@ -39,11 +34,6 @@ RUN apt-get update \
     && sed -i 's/defaultWallpaperTheme=.*/defaultWallpaperTheme=ezgo/' /usr/share/plasma/desktoptheme/*/metadata.desktop \
     && sed -i 's/defaultWallpaperWidth=.*/defaultWallpaperWidth=1920/' /usr/share/plasma/desktoptheme/*/metadata.desktop \
     && sed -i 's/defaultWallpaperHeight=.*/defaultWallpaperHeight=1080/' /usr/share/plasma/desktoptheme/*/metadata.desktop \
-    && cp /usr/share/ezgo/ezgo-kde5/defaultPanel.layout.js \
-          /usr/share/plasma/layout-templates/org.kde.plasma.desktop.defaultPanel/contents/layout.js \
-    && ln -s /usr/share/ezgo/ezgo-artwork/default-dm/1920x1080.png /usr/share/plasma/look-and-feel/org.kde.breeze.desktop/contents/components/artwork/background.png \
-    && cp /usr/share/ezgo/ezgo-kde5/desktop.layout.js /usr/share/plasma/shells/org.kde.plasma.desktop/contents/layout.js \
-    && ln -s /etc/xdg/menus/kf5-applications.menu /etc/xdg/menus/ezgo-applications.menu \
     && echo "run_im fcitx" > /etc/skel/.xinputrc \
     && cd /root \
     && wget -O chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
@@ -59,7 +49,7 @@ RUN apt-get update \
     && echo startkde >> /home/ezgo/.xsession \
     && chown -R ezgo:ezgo /home/ezgo \
     && echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4 \
-    && update-alternatives --set x-www-browser /usr/bin/firefox
+    && update-alternatives --set x-www-browser /usr/bin/google-chrome-stable
     
 USER ezgo
 WORKDIR /home/ezgo
