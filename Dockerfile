@@ -7,7 +7,7 @@ COPY plasmarc /etc/skel/.config/plasmarc
 COPY servers.conf /etc/supervisor/conf.d/servers.conf
 COPY google-chrome.desktop /usr/share/applications/google-chrome.desktop
 
-RUN apt-get update && apt-get install -y gnupg2 libglib2.0-bin wget git \
+RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4CD565B5 \
     && echo "deb http://free.nchc.org.tw/ezgo-core testing main" | tee /etc/apt/sources.list.d/ezgo.list \
     && mkdir -p /usr/share/locale-langpack/zh_TW/LC_MESSAGES \
