@@ -3,6 +3,10 @@ FROM ubuntu:18.04
 ENV DEBIAN_FRONTEND noninteractive
 ENV XDG_RUNTIME_DIR /run/user/1000
 ENV TZ Asia/Taipei
+ENV LANG zh_TW.UTF-8
+ENV LANGUAGE zh_TW
+ENV LC_ALL zh_TW.UTF-8
+ENV DISPLAY :1
 
 COPY plasmarc /etc/skel/.config/plasmarc
 COPY servers.conf /etc/supervisor/conf.d/servers.conf
@@ -31,8 +35,8 @@ RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git \
     && locale-gen "zh_TW.UTF-8" \
     && dpkg-reconfigure locales \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
-    && sed -i 's/LANG=\(.*\)/LANG=\"zh_TW.UTF-8\"/g' /etc/default/locale \
-    && sed -i 's/LANGUAGE=\(.*\)/LANGUAGE=\"zh_TW\"/g' /etc/default/locale \
+    && sed -i 's/LANG=\(.*\)/LANG=\"$LANG\"/g' /etc/default/locale \
+    && sed -i 's/LANGUAGE=\(.*\)/LANGUAGE=\"$LANGUAGE\"/g' /etc/default/locale \
     && sed -i 's/defaultWallpaperTheme=.*/defaultWallpaperTheme=ezgo/' /usr/share/plasma/desktoptheme/*/metadata.desktop \
     && sed -i 's/defaultWallpaperWidth=.*/defaultWallpaperWidth=1920/' /usr/share/plasma/desktoptheme/*/metadata.desktop \
     && sed -i 's/defaultWallpaperHeight=.*/defaultWallpaperHeight=1080/' /usr/share/plasma/desktoptheme/*/metadata.desktop \
@@ -55,11 +59,6 @@ RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git \
     
 USER ezgo
 WORKDIR /home/ezgo
-
-ENV LANG zh_TW.UTF-8
-ENV LANGUAGE zh_TW.utf-8
-ENV LC_ALL zh_TW.UTF-8
-ENV DISPLAY :1
 
 EXPOSE 80 3389 5900
 CMD sudo /usr/bin/supervisord -n
