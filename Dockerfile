@@ -2,10 +2,6 @@ FROM ubuntu:18.04
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV XDG_RUNTIME_DIR /run/user/1000
-ENV TZ Asia/Taipei
-ENV LANG zh_TW.UTF-8
-ENV LANGUAGE zh_TW
-ENV LC_ALL zh_TW.UTF-8
 ENV DISPLAY :1
 
 COPY plasmarc /etc/skel/.config/plasmarc
@@ -34,9 +30,9 @@ RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git \
     && echo "zh_TW.UTF-8 UTF-8" > /etc/locale.gen \
     && locale-gen "zh_TW.UTF-8" \
     && dpkg-reconfigure locales \
-    && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
-    && sed -i 's/LANG=\(.*\)/LANG=\"$LANG\"/g' /etc/default/locale \
-    && sed -i 's/LANGUAGE=\(.*\)/LANGUAGE=\"$LANGUAGE\"/g' /etc/default/locale \
+    && ln -snf /usr/share/zoneinfo/Asia/Taipei /etc/localtime && echo Asia/Taipei > /etc/timezone \
+    && sed -i 's/LANG=\(.*\)/LANG=\"zh_TW.UTF-8\"/g' /etc/default/locale \
+    && sed -i 's/LANGUAGE=\(.*\)/LANGUAGE=\"zh_TW.UTF-8\"/g' /etc/default/locale \
     && sed -i 's/defaultWallpaperTheme=.*/defaultWallpaperTheme=ezgo/' /usr/share/plasma/desktoptheme/*/metadata.desktop \
     && sed -i 's/defaultWallpaperWidth=.*/defaultWallpaperWidth=1920/' /usr/share/plasma/desktoptheme/*/metadata.desktop \
     && sed -i 's/defaultWallpaperHeight=.*/defaultWallpaperHeight=1080/' /usr/share/plasma/desktoptheme/*/metadata.desktop \
