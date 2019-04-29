@@ -50,7 +50,7 @@ RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git \
     && mkdir -p /home/ezgo/.config/chrome-remote-desktop \
     && echo startkde >> /home/ezgo/.xsession \
     && chown -R ezgo:ezgo /home/ezgo \
-    && echo 'allowed_users=console' > /etc/X11/Xwrapper.config \
+    && echo 'allowed_users=anybody' > /etc/X11/Xwrapper.config \
     && echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4 \
     && update-alternatives --set x-www-browser /usr/bin/google-chrome-stable
     
