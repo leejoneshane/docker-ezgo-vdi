@@ -1,7 +1,6 @@
 FROM ubuntu:18.04
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV XDG_RUNTIME_DIR /run/user/1000
 ENV DISPLAY :1
 
 COPY plasmarc /etc/skel/.config/plasmarc
@@ -26,7 +25,6 @@ RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git \
     && useradd -m -s /bin/bash -G sudo,chrome-remote-desktop,pulse-access ezgo \
     && echo "ezgo:ezgo" | chpasswd \
     && echo 'ezgo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
-    && mkdir -p /run/user/1000 \
     && echo "zh_TW.UTF-8 UTF-8" > /etc/locale.gen \
     && locale-gen "zh_TW.UTF-8" \
     && dpkg-reconfigure locales \
