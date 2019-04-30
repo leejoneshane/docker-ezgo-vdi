@@ -1,6 +1,8 @@
 FROM ubuntu:18.04
 
 ENV DEBIAN_FRONTEND noninteractive
+ENV LANG zh_TW.UTF-8
+ENV LANGUAGE zh_TW
 ENV DISPLAY :1
 
 COPY plasmarc /etc/skel/.config/plasmarc
