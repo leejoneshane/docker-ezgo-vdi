@@ -34,6 +34,7 @@ RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git \
     && sed -i 's/defaultWallpaperTheme=.*/defaultWallpaperTheme=ezgo/' /usr/share/plasma/desktoptheme/*/metadata.desktop \
     && sed -i 's/defaultWallpaperWidth=.*/defaultWallpaperWidth=1920/' /usr/share/plasma/desktoptheme/*/metadata.desktop \
     && sed -i 's/defaultWallpaperHeight=.*/defaultWallpaperHeight=1080/' /usr/share/plasma/desktoptheme/*/metadata.desktop \
+    && ln -s /etc/xdg/menus/kf5-applications.menu /etc/xdg/menus/ezgo-applications.menu \
     && echo "run_im fcitx" > /etc/skel/.xinputrc \
     && cd /root \
     && wget -O chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
@@ -50,7 +51,7 @@ RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git \
     && chown -R ezgo:ezgo /home/ezgo \
     && echo 'allowed_users=anybody' > /etc/X11/Xwrapper.config \
     && echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4 \
-    && update-alternatives --set x-www-browser /usr/bin/google-chrome-stable
+    && update-alternatives --set x-www-browser /usr/bin/firefox
     
 USER ezgo
 WORKDIR /home/ezgo
