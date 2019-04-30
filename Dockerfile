@@ -12,12 +12,12 @@ RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git \
     && echo "deb http://free.nchc.org.tw/ezgo-core testing main" | tee /etc/apt/sources.list.d/ezgo.list \
     && mkdir -p /usr/share/locale-langpack/zh_TW/LC_MESSAGES \
     && apt-get update \
-    && apt-get install -yq kubuntu-desktop pulseaudio locales x11vnc xvfb xrdp supervisor fonts-liberation libappindicator3-1 \
-                           libdbusmenu-gtk3-4 libindicator3-7 xbase-clients python-psutil \
+    && apt-get install -yq kde-plasma-desktop pulseaudio locales x11vnc xvfb xrdp supervisor fonts-liberation libappindicator3-1 \
+                           libdbusmenu-gtk3-4 libindicator3-7 xbase-clients python-psutil language-pack-kde-zh-hant \
     && apt-get install -yq ezgo-artwork ezgo-menu ezgo-kde5 ezgo-phet ezgo-usgs ezgo-npa ezgo-chem ezgo-gsyan ezgo-wordtest \
                            ezgo-misc-arduino-rules ezgo-misc-decompress ezgo-misc-desktop-files ezgo-misc-furiusisomount \
                            ezgo-misc-inkscape ezgo-misc-installer ezgo-misc-kdenlive ezgo-misc-klavaro ezgo-misc-ktuberling \
-                           ezgo-misc-qtqr ezgo-misc-winff \
+                           ezgo-misc-qtqr ezgo-misc-winff firefox xmind \
     && apt-get autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
