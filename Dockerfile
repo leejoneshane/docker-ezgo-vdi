@@ -8,18 +8,24 @@ ENV DISPLAY :1
 COPY plasmarc /etc/skel/.config/plasmarc
 COPY servers.conf /etc/supervisor/conf.d/servers.conf
 COPY google-chrome.desktop /usr/share/applications/google-chrome.desktop
+COPY scratch-desktop_1.2.1_amd64.deb /tmp/scratch-desktop_1.2.1_amd64.deb
+COPY scratch-desktop.desktop /usr/share/applications/scratch-desktop.desktop
+COPY xmind-installer.sh /tmp/xmind-installer.sh
+COPY install-xmind.sh /usr/share/applications/install-xmind.sh
 
-RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git vim \
+RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git vim gdebi \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4CD565B5 \
     && echo "deb http://free.nchc.org.tw/ezgo-core testing main" | tee /etc/apt/sources.list.d/ezgo.list \
-    && mkdir -p /usr/share/locale-langpack/zh_TW/LC_MESSAGES \
+    && add-apt-repository -y ppa:libreoffice/ppa \
     && apt-get update \
     && apt-get install -yq kde-plasma-desktop pulseaudio locales x11vnc xvfb xrdp supervisor fonts-liberation libappindicator3-1 \
                            libdbusmenu-gtk3-4 libindicator3-7 xbase-clients python-psutil language-pack-kde-zh-hant \
-    && apt-get install -yq ezgo-artwork ezgo-menu ezgo-kde5 ezgo-phet ezgo-usgs ezgo-npa ezgo-chem ezgo-gsyan ezgo-wordtest \
-                           ezgo-misc-arduino-rules ezgo-misc-decompress ezgo-misc-desktop-files ezgo-misc-furiusisomount \
+    && apt-get install -yq about-ezgo ezgo-accessories ezgo-artwork ezgo-menu ezgo-kde5 ezgo-phet ezgo-usgs ezgo-npa ezgo-chem \
+                           ezgo-gsyan ezgo-wordtest firefox ezgo-games ezgo-common ezgo-doc ezgo-education ezgo-graphics \
+                           ezgo-network ezgo-office ezgo-unity libreoffice audacity \
+    && apt-get install -yq ezgo-misc-arduino-rules ezgo-misc-decompress ezgo-misc-desktop-files ezgo-misc-furiusisomount \
                            ezgo-misc-inkscape ezgo-misc-installer ezgo-misc-kdenlive ezgo-misc-klavaro ezgo-misc-ktuberling \
-                           ezgo-misc-qtqr ezgo-misc-winff firefox \
+                           ezgo-misc-qtqr ezgo-misc-winff ezgo-misc-7zip ezgo-misc-audacity ezgo-misc-tuxpaint \
     && apt-get autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
@@ -51,6 +57,7 @@ RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git vim
     && echo startkde >> /home/ezgo/.xsession \
     && chown -R ezgo:ezgo /home/ezgo \
     && echo 'allowed_users=anybody' > /etc/X11/Xwrapper.config \
+    && gdebi /tmp/scratch-desktop_1.2.1_amd64.deb \
     && echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4 \
     && update-alternatives --set x-www-browser /usr/bin/firefox
     
