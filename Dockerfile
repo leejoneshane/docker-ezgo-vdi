@@ -13,7 +13,7 @@ COPY scratch-desktop.desktop /usr/share/applications/scratch-desktop.desktop
 COPY xmind-installer.sh /tmp/xmind-installer.sh
 COPY install-xmind.sh /usr/share/applications/install-xmind.sh
 
-RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git vim gdebi \
+RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git vim gdebi software-properties-common \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4CD565B5 \
     && echo "deb http://free.nchc.org.tw/ezgo-core testing main" | tee /etc/apt/sources.list.d/ezgo.list \
     && add-apt-repository -y ppa:libreoffice/ppa \
