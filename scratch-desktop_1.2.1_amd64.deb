@@ -1,0 +1,19 @@
+[Desktop Entry]
+Comment[zh_TW]=
+Comment=
+Exec=/usr/bin/scratch-desktop
+GenericName[zh_TW]=
+GenericName=
+Icon=/usr/share/pixmaps/scratch-desktop.png
+MimeType=
+Name[zh_TW]=scratch-desktop
+Name=scratch-desktop
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=
