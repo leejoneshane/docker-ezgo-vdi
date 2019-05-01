@@ -1,4 +1,4 @@
 #!/bin/bash
 
 user=`whoami`
-(cd .xmind_installer;sudo ./xmind-installer.sh $user)
+(cd .xmind_installer;sudo /tmp/xmind-installer.sh $user)
