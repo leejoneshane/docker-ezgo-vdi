@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git vim
                            libdbusmenu-gtk3-4 libindicator3-7 xbase-clients python-psutil language-pack-kde-zh-hant \
     && apt-get install -yq about-ezgo ezgo-accessories ezgo-artwork ezgo-menu ezgo-kde5 ezgo-phet ezgo-usgs ezgo-npa ezgo-chem \
                            ezgo-gsyan ezgo-wordtest firefox ezgo-games ezgo-common ezgo-education ezgo-graphics ezgo-unity \
-                           ezgo-network ezgo-office audacity ezgo-multimedia ndcodfapplicationtools6 oxobasis1* \
+                           ezgo-network ezgo-office audacity ezgo-multimedia ndcodfapplicationtools6* oxobasis1* \
     && apt-get install -yq ezgo-misc-arduino-rules ezgo-misc-decompress ezgo-misc-desktop-files ezgo-misc-furiusisomount \
                            ezgo-misc-inkscape ezgo-misc-installer ezgo-misc-kdenlive ezgo-misc-klavaro ezgo-misc-ktuberling \
                            ezgo-misc-qtqr ezgo-misc-winff ezgo-misc-7zip ezgo-misc-audacity ezgo-misc-tuxpaint \
