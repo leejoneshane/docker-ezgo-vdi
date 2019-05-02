@@ -8,10 +8,10 @@ ENV DISPLAY :1
 COPY plasmarc /etc/skel/.config/plasmarc
 COPY servers.conf /etc/supervisor/conf.d/servers.conf
 COPY google-chrome.desktop /usr/share/applications/google-chrome.desktop
-COPY scratch-desktop_1.2.1_amd64.deb /tmp/scratch-desktop_1.2.1_amd64.deb
+COPY scratch-desktop /usr/lib/scratch-desktop
+COPY scratch-icon.png /usr/share/pixmaps/scratch-desktop.png
 COPY scratch-desktop.desktop /usr/share/applications/scratch-desktop.desktop
 COPY xmind-installer.sh /tmp/xmind-installer.sh
-COPY install-xmind.sh /usr/share/applications/install-xmind.sh
 
 RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git vim gdebi software-properties-common \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4CD565B5 \
@@ -29,6 +29,7 @@ RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git vim
     && apt-get autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
+    && cd /usr/lib/scratch-desktop && unzip electron.zip && rm -rf electron.zip \
     && addgroup chrome-remote-desktop \
     && useradd -m -s /bin/bash -G sudo,chrome-remote-desktop,pulse-access ezgo \
     && echo "ezgo:ezgo" | chpasswd \
@@ -55,11 +56,12 @@ RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git vim
     && xrdp-keygen xrdp auto \
     && mkdir -p /home/ezgo/.config/chrome-remote-desktop \
     && echo startkde >> /home/ezgo/.xsession \
-    && chown -R ezgo:ezgo /home/ezgo \
     && echo 'allowed_users=anybody' > /etc/X11/Xwrapper.config \
-    && gdebi /tmp/scratch-desktop_1.2.1_amd64.deb \
     && echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4 \
-    && update-alternatives --set x-www-browser /usr/bin/firefox
+    && update-alternatives --set x-www-browser /usr/bin/firefox \
+    && cp /tmp/xmind-installer.sh /home/ezgo && chmod 755 /home/ezgo/xmind-installer.sh \
+    && cd /home/ezgo && ./xmind-installer.sh ezgo \
+    && chown -R ezgo:ezgo /home/ezgo
     
 USER ezgo
 WORKDIR /home/ezgo
