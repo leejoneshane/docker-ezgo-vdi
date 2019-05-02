@@ -13,16 +13,15 @@ COPY scratch-icon.png /usr/share/pixmaps/scratch-desktop.png
 COPY scratch-desktop.desktop /usr/share/applications/scratch-desktop.desktop
 COPY xmind-installer.sh /tmp/xmind-installer.sh
 
-RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git vim gdebi software-properties-common \
+RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git vim gdebi software-properties-common openjdk-8-jdk \
     && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4CD565B5 \
     && echo "deb http://free.nchc.org.tw/ezgo-core testing main" | tee /etc/apt/sources.list.d/ezgo.list \
-    && add-apt-repository -y ppa:libreoffice/ppa \
     && apt-get update \
     && apt-get install -yq kde-plasma-desktop pulseaudio locales x11vnc xvfb xrdp supervisor fonts-liberation libappindicator3-1 \
                            libdbusmenu-gtk3-4 libindicator3-7 xbase-clients python-psutil language-pack-kde-zh-hant \
     && apt-get install -yq about-ezgo ezgo-accessories ezgo-artwork ezgo-menu ezgo-kde5 ezgo-phet ezgo-usgs ezgo-npa ezgo-chem \
                            ezgo-gsyan ezgo-wordtest firefox ezgo-games ezgo-common ezgo-education ezgo-graphics ezgo-unity \
-                           ezgo-network ezgo-office libreoffice audacity \
+                           ezgo-network ezgo-office audacity ezgo-multimedia ndcodfapplicationtools6 oxobasis1* \
     && apt-get install -yq ezgo-misc-arduino-rules ezgo-misc-decompress ezgo-misc-desktop-files ezgo-misc-furiusisomount \
                            ezgo-misc-inkscape ezgo-misc-installer ezgo-misc-kdenlive ezgo-misc-klavaro ezgo-misc-ktuberling \
                            ezgo-misc-qtqr ezgo-misc-winff ezgo-misc-7zip ezgo-misc-audacity ezgo-misc-tuxpaint \
@@ -60,7 +59,9 @@ RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git vim
     && echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4 \
     && update-alternatives --set x-www-browser /usr/bin/firefox \
     && cp /tmp/xmind-installer.sh /home/ezgo && chmod 755 /home/ezgo/xmind-installer.sh \
-    && cd /home/ezgo && ./xmind-installer.sh ezgo \
+    && cd /home/ezgo \
+    && wget https://dl3.xmind.net/xmind-8-update8-linux.zip \
+    && ./xmind-installer.sh ezgo \
     && chown -R ezgo:ezgo /home/ezgo
     
 USER ezgo
