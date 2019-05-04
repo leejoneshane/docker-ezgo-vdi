@@ -49,7 +49,7 @@ RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git vim
     && wget -O chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
     && wget -O crd.deb https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb \
     && dpkg -i ./chrome.deb && dpkg -i ./crd.deb && rm -f chrome.deb crd.deb \
-    && unzip gantt.zip -d /root/gantt && cd /root/gantt && chmod +x ganttproject.sh && ./ganttproject.sh \
+    && unzip gantt.zip && cd /root/gantt* && chmod +x ganttproject && ./ganttproject \
     && cd /usr/lib \
     && git clone https://github.com/novnc/noVNC \
     && cp /usr/lib/noVNC/vnc.html /usr/lib/noVNC/index.html \
