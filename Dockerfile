@@ -45,9 +45,11 @@ RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git vim
     && sed -i 's/defaultWallpaperHeight=.*/defaultWallpaperHeight=1080/' /usr/share/plasma/desktoptheme/*/metadata.desktop \
     && echo "run_im fcitx" > /etc/skel/.xinputrc \
     && cd /root \
+    && wget -O gantt.zip https://github.com/bardsoftware/ganttproject/releases/download/ganttproject-2.8.10/ganttproject-2.8.10-r2364.zip \
     && wget -O chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
     && wget -O crd.deb https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb \
     && dpkg -i ./chrome.deb && dpkg -i ./crd.deb && rm -f chrome.deb crd.deb \
+    && unzip gantt.zip -d /root/gantt && cd /root/gantt && chmod +x ganttproject.sh && ./ganttproject.sh \
     && cd /usr/lib \
     && git clone https://github.com/novnc/noVNC \
     && cp /usr/lib/noVNC/vnc.html /usr/lib/noVNC/index.html \
