@@ -1,14 +1,14 @@
 [Desktop Entry]
 Comment[zh_TW]=
 Comment=
-Exec=/usr/bin/scratch-desktop
+Exec=/usr/lib/scratch-desktop
 GenericName[zh_TW]=
 GenericName=
 Icon=/usr/share/pixmaps/scratch-desktop.png
 MimeType=
 Name[zh_TW]=scratch-desktop
 Name=scratch-desktop
-Path=
+Path=/usr/lib/scratch-desktop
 StartupNotify=true
 Terminal=false
 TerminalOptions=
