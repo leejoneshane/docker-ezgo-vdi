@@ -29,7 +29,7 @@ RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git vim
     && apt-get autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
-    && cd /usr/lib/scratch-desktop && unzip electron.zip && rm -rf electron.zip \
+    && cd /usr/lib/scratch-desktop && unzip electron.zip && rm -rf electron.zip && chmod +x electron \
     && addgroup chrome-remote-desktop \
     && useradd -m -s /bin/bash -G sudo,chrome-remote-desktop,pulse-access ezgo \
     && echo "ezgo:ezgo" | chpasswd \
