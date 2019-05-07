@@ -65,6 +65,7 @@ RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git vim
     && cd /home/ezgo \
     && wget https://dl3.xmind.net/xmind-8-update8-linux.zip \
     && ./xmind-installer.sh ezgo \
+    && rm -rf *.zip \
     && chown -R ezgo:ezgo /home/ezgo
     
 USER ezgo
