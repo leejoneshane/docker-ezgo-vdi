@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG zh_TW.UTF-8
@@ -8,35 +8,32 @@ ENV DISPLAY :1
 COPY plasmarc /etc/skel/.config/plasmarc
 COPY servers.conf /etc/supervisor/conf.d/servers.conf
 COPY google-chrome.desktop /usr/share/applications/google-chrome.desktop
-COPY scratch-desktop /usr/lib/scratch-desktop
-COPY scratch-icon.png /usr/share/pixmaps/scratch-desktop.png
-COPY scratch-desktop.desktop /usr/share/applications/scratch-desktop.desktop
-COPY xmind-installer.sh /tmp/xmind-installer.sh
 
-RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git vim gdebi software-properties-common openjdk-8-jdk \
-    && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4CD565B5 \
-    && echo "deb http://free.nchc.org.tw/ezgo-core testing main" | tee /etc/apt/sources.list.d/ezgo.list \
-    && add-apt-repository ppa:libreoffice/ppa \
-    && apt-get update \
-    && apt-get install -yq kde-plasma-desktop pulseaudio locales x11vnc xvfb xrdp supervisor fonts-liberation libappindicator3-1 \
+RUN apt-get update \
+    && echo "6\n73" | apt-get install -yq tzdata \
+    && apt-get install -yq sudo gnupg2 wget git vim gdebi libglib2.0-bin software-properties-common openjdk-11-jdk python3-psutil \
+    && echo "1" | apt-get install -yq kde-plasma-desktop \
+    && apt-get install -yq pulseaudio locales x11vnc xvfb xrdp supervisor fonts-liberation libappindicator3-1 \
                            libdbusmenu-gtk3-4 libindicator3-7 xbase-clients python-psutil language-pack-kde-zh-hant \
+    && wget -q https://free.nchc.org.tw/ezgo-core/ezgo.gpg.key -O- | sudo apt-key add - \
+    && echo "deb http://free.nchc.org.tw/ezgo-core testing main" | tee /etc/apt/sources.list.d/ezgo.list \
+    && echo "\n" | add-apt-repository ppa:libreoffice/ppa \
+    && apt-get update \
     && apt-get install -yq about-ezgo ezgo-accessories ezgo-artwork ezgo-menu ezgo-kde5 ezgo-phet ezgo-usgs ezgo-npa ezgo-chem \
                            ezgo-gsyan ezgo-wordtest firefox ezgo-games ezgo-common ezgo-education ezgo-graphics ezgo-unity \
                            ezgo-network ezgo-office audacity ezgo-multimedia libreoffice \
-    && apt-get install -yq ezgo-misc-arduino-rules ezgo-misc-decompress ezgo-misc-desktop-files ezgo-misc-furiusisomount \
+    && apt-get install -yq ezgo-misc-arduino-rules ezgo-misc-decompress ezgo-misc-desktop-files \
                            ezgo-misc-inkscape ezgo-misc-installer ezgo-misc-kdenlive ezgo-misc-klavaro ezgo-misc-ktuberling \
                            ezgo-misc-qtqr ezgo-misc-winff ezgo-misc-7zip ezgo-misc-audacity ezgo-misc-tuxpaint \
     && apt-get autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
-    && cd /usr/lib/scratch-desktop && unzip electron.zip && rm -rf electron.zip && chmod +x electron \
     && addgroup chrome-remote-desktop \
     && useradd -m -s /bin/bash -G sudo,chrome-remote-desktop,pulse-access ezgo \
     && echo "ezgo:ezgo" | chpasswd \
     && echo 'ezgo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
     && echo "zh_TW.UTF-8 UTF-8" > /etc/locale.gen \
     && locale-gen "zh_TW.UTF-8" \
-    && dpkg-reconfigure locales \
     && ln -snf /usr/share/zoneinfo/Asia/Taipei /etc/localtime && echo Asia/Taipei > /etc/timezone \
     && sed -i 's/LANG=\(.*\)/LANG=\"zh_TW.UTF-8\"/g' /etc/default/locale \
     && sed -i 's/LANGUAGE=\(.*\)/LANGUAGE=\"zh_TW.UTF-8\"/g' /etc/default/locale \
@@ -45,11 +42,13 @@ RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git vim
     && sed -i 's/defaultWallpaperHeight=.*/defaultWallpaperHeight=1080/' /usr/share/plasma/desktoptheme/*/metadata.desktop \
     && echo "run_im fcitx" > /etc/skel/.xinputrc \
     && cd /root \
-    && wget -O gantt.zip https://github.com/bardsoftware/ganttproject/releases/download/ganttproject-2.8.10/ganttproject-2.8.10-r2364.zip \
+    && wget https://github.com/scratux/scratux/releases/download/1.4.1/scratux_1.4.1_amd64.deb \
+    && dpkg -i scratux_1.4.1_amd64.deb \
+    && wget https://www.xmind.net/xmind/downloads/XMind-2020-for-Linux-amd-64bit-10.2.1-202008051959.deb \
+    && dpkg -i XMind-2020-for-Linux-amd-64bit-10.2.1-202008051959.deb \
     && wget -O chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
     && wget -O crd.deb https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb \
     && dpkg -i ./chrome.deb && dpkg -i ./crd.deb && rm -f chrome.deb crd.deb \
-    && unzip gantt.zip && rm -rf gantt.zip && cd /root/gantt* && chmod +x ganttproject && ./ganttproject \
     && cd /usr/lib \
     && git clone https://github.com/novnc/noVNC \
     && cp /usr/lib/noVNC/vnc.html /usr/lib/noVNC/index.html \
@@ -61,11 +60,6 @@ RUN apt-get update && apt-get install -y sudo gnupg2 libglib2.0-bin wget git vim
     && echo 'allowed_users=anybody' > /etc/X11/Xwrapper.config \
     && echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4 \
     && update-alternatives --set x-www-browser /usr/bin/firefox \
-    && cp /tmp/xmind-installer.sh /home/ezgo && chmod 755 /home/ezgo/xmind-installer.sh \
-    && cd /home/ezgo \
-    && wget https://dl3.xmind.net/xmind-8-update8-linux.zip \
-    && ./xmind-installer.sh ezgo \
-    && rm -rf *.zip \
     && chown -R ezgo:ezgo /home/ezgo
     
 USER ezgo
