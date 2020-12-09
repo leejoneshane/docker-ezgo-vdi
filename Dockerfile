@@ -47,8 +47,7 @@ RUN apt-get update \
     && wget https://www.xmind.net/xmind/downloads/XMind-2020-for-Linux-amd-64bit-10.2.1-202008051959.deb \
     && dpkg -i XMind-2020-for-Linux-amd-64bit-10.2.1-202008051959.deb \
     && wget -O chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-    && wget -O crd.deb https://dl.google.com/linux/direct/chrome-remote-desktop_current_amd64.deb \
-    && dpkg -i ./chrome.deb && dpkg -i ./crd.deb && rm -f chrome.deb crd.deb \
+    && dpkg -i ./chrome.deb && rm -f chrome.deb \
     && cd /usr/lib \
     && git clone https://github.com/novnc/noVNC \
     && cp /usr/lib/noVNC/vnc.html /usr/lib/noVNC/index.html \
@@ -59,7 +58,6 @@ RUN apt-get update \
     && echo startkde >> /home/ezgo/.xsession \
     && echo 'allowed_users=anybody' > /etc/X11/Xwrapper.config \
     && echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4 \
-    && update-alternatives --set x-www-browser /usr/bin/firefox \
     && chown -R ezgo:ezgo /home/ezgo
     
 USER ezgo
