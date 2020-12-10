@@ -22,14 +22,13 @@ RUN apt-get update \
     && apt-get install -yq about-ezgo ezgo-accessories ezgo-artwork ezgo-menu ezgo-kde5 ezgo-phet ezgo-usgs ezgo-npa ezgo-chem \
                            ezgo-gsyan ezgo-wordtest firefox ezgo-games ezgo-common ezgo-education ezgo-graphics ezgo-unity \
                            ezgo-network ezgo-office audacity ezgo-multimedia libreoffice \
-    && apt-get install -yq ezgo-misc-arduino-rules ezgo-misc-decompress ezgo-misc-desktop-files \
+                           ezgo-misc-arduino-rules ezgo-misc-decompress ezgo-misc-desktop-files \
                            ezgo-misc-inkscape ezgo-misc-installer ezgo-misc-kdenlive ezgo-misc-klavaro ezgo-misc-ktuberling \
                            ezgo-misc-qtqr ezgo-misc-winff ezgo-misc-7zip ezgo-misc-audacity ezgo-misc-tuxpaint \
     && apt-get autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
-    && addgroup chrome-remote-desktop \
-    && useradd -m -s /bin/bash -G sudo,chrome-remote-desktop,pulse-access ezgo \
+    && useradd -m -s /bin/bash -G sudo,pulse-access ezgo \
     && echo "ezgo:ezgo" | chpasswd \
     && echo 'ezgo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
     && echo "zh_TW.UTF-8 UTF-8" > /etc/locale.gen \
@@ -44,8 +43,8 @@ RUN apt-get update \
     && cd /root \
     && wget https://github.com/scratux/scratux/releases/download/1.4.1/scratux_1.4.1_amd64.deb \
     && dpkg -i scratux_1.4.1_amd64.deb \
-    && wget https://www.xmind.net/xmind/downloads/XMind-2020-for-Linux-amd-64bit-10.2.1-202008051959.deb \
-    && dpkg -i XMind-2020-for-Linux-amd-64bit-10.2.1-202008051959.deb \
+#    && wget https://www.xmind.net/xmind/downloads/XMind-2020-for-Linux-amd-64bit-10.2.1-202008051959.deb \
+#    && dpkg -i XMind-2020-for-Linux-amd-64bit-10.2.1-202008051959.deb \
     && wget -O chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
     && dpkg -i ./chrome.deb && rm -f chrome.deb \
     && cd /usr/lib \
@@ -54,7 +53,6 @@ RUN apt-get update \
     && cd /usr/lib/noVNC/utils \
     && git clone https://github.com/novnc/websockify \
     && xrdp-keygen xrdp auto \
-    && mkdir -p /home/ezgo/.config/chrome-remote-desktop \
     && echo startkde >> /home/ezgo/.xsession \
     && echo 'allowed_users=anybody' > /etc/X11/Xwrapper.config \
     && echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4 \
