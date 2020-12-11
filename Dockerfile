@@ -5,10 +5,6 @@ ENV LANG zh_TW.UTF-8
 ENV LANGUAGE zh_TW
 ENV DISPLAY :1
 
-COPY plasmarc /etc/skel/.config/plasmarc
-COPY servers.conf /etc/supervisor/conf.d/servers.conf
-COPY google-chrome.desktop /usr/share/applications/google-chrome.desktop
-
 RUN apt-get update \
     && echo "6\n73" | apt-get install -yq tzdata \
     && apt-get install -yq sudo gnupg2 wget git vim gdebi libglib2.0-bin software-properties-common openjdk-11-jdk python3-psutil \
@@ -43,8 +39,8 @@ RUN apt-get update \
     && cd /root \
     && wget https://github.com/scratux/scratux/releases/download/1.4.1/scratux_1.4.1_amd64.deb \
     && dpkg -i scratux_1.4.1_amd64.deb \
-#    && wget https://www.xmind.net/xmind/downloads/XMind-2020-for-Linux-amd-64bit-10.2.1-202008051959.deb \
-#    && dpkg -i XMind-2020-for-Linux-amd-64bit-10.2.1-202008051959.deb \
+    && wget https://www.xmind.net/xmind/downloads/XMind-2020-for-Linux-amd-64bit-10.2.1-202008051959.deb \
+    && dpkg -i XMind-2020-for-Linux-amd-64bit-10.2.1-202008051959.deb \
     && wget -O chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
     && dpkg -i ./chrome.deb && rm -f chrome.deb \
     && cd /usr/lib \
@@ -57,7 +53,10 @@ RUN apt-get update \
     && echo 'allowed_users=anybody' > /etc/X11/Xwrapper.config \
     && echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4 \
     && chown -R ezgo:ezgo /home/ezgo
-    
+
+COPY plasmarc /etc/skel/.config/plasmarc
+COPY servers.conf /etc/supervisor/conf.d/servers.conf
+COPY google-chrome.desktop /usr/share/applications/google-chrome.desktop
 USER ezgo
 WORKDIR /home/ezgo
 
