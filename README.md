@@ -1,7 +1,7 @@
 # docker-ezgo-vdi
 
 run *[ezgo](http://ezgo.westart.tw/)* in docker to provide virtual desktop.
-Now, it's version 14 and ezgo13 is [here](https://github.com/leejoneshane/docker-ezgo-vdi/tree/13).
+Now, it's version 14.1 and ezgo13 is [here](https://github.com/leejoneshane/docker-ezgo-vdi/tree/13).
 
 **Quick Start**
 
