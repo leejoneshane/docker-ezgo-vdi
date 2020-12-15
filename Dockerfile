@@ -1,6 +1,7 @@
 FROM ubuntu
 
 ENV DEBIAN_FRONTEND noninteractive
+ENV LC_ALL zh_TW.UTF-8
 ENV LANG zh_TW.UTF-8
 ENV LANGUAGE zh_TW
 ENV DISPLAY :1
@@ -48,6 +49,7 @@ RUN apt-get update \
     && echo "dbus-launch startplasma-x11" >> /home/ezgo/.xsession \
     && echo 'allowed_users=anybody' > /etc/X11/Xwrapper.config \
     && echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4 \
+    && mkdir -p /root/.config && touch /root/.config/rc \
     && chown -R ezgo:ezgo /home/ezgo
 
 COPY plasmarc /etc/skel/.config/plasmarc
