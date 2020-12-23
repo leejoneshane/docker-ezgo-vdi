@@ -50,7 +50,8 @@ RUN apt-get update \
     && echo 'allowed_users=anybody' > /etc/X11/Xwrapper.config \
     && echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4 \
     && mkdir -p /root/.config && touch /root/.config/rc \
-    && chown -R ezgo:ezgo /home/ezgo
+    && chown -R ezgo:ezgo /home/ezgo \
+    && sed -i 's/.*kdeinit/###&/' /usr/bin/startplasma-x11
 
 COPY plasmarc /etc/skel/.config/plasmarc
 COPY servers.conf /etc/supervisor/conf.d/servers.conf
