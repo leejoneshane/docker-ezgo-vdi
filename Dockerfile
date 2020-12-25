@@ -1,16 +1,18 @@
-FROM ubuntu
+FROM kdeneon/plasma
 
-ENV DEBIAN_FRONTEND noninteractive
 ENV LC_ALL zh_TW.UTF-8
 ENV LANG zh_TW.UTF-8
 ENV LANGUAGE zh_TW
-ENV DISPLAY :1
+USER root
 
-RUN apt-get update \
-    && echo "6\n73\n" | apt-get install -yq tzdata locales \
-    && apt-get install -yq sudo pulseaudio gnupg2 wget git vim mc software-properties-common python \
-    && echo "27\n23\n" | apt-get install -yq kubuntu-desktop language-pack-kde-zh-hant \
-    && apt-get install -yq x11vnc xvfb xrdp supervisor \
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections \
+    && apt-get update \
+    && ln -snf /usr/share/zoneinfo/Asia/Taipei /etc/localtime && echo Asia/Taipei > /etc/timezone \
+    && apt-get install -y tzdata locales \
+    && echo "zh_TW.UTF-8 UTF-8" > /etc/locale.gen \
+    && locale-gen "zh_TW.UTF-8" \
+    && apt-get install -yq sudo pulseaudio gnupg2 wget git vim mc software-properties-common python language-pack-kde-zh-hant \
+    && apt-get install -yq dbus-x11 x11vnc xvfb xrdp supervisor \
     && wget -q https://free.nchc.org.tw/ezgo-core/ezgo.gpg.key -O- | sudo apt-key add - \
     && echo "deb http://free.nchc.org.tw/ezgo-core testing main" | tee /etc/apt/sources.list.d/ezgo.list \
     && apt-get update \
@@ -20,15 +22,16 @@ RUN apt-get update \
                            ezgo-misc-arduino-rules ezgo-misc-decompress ezgo-misc-desktop-files \
                            ezgo-misc-inkscape ezgo-misc-installer ezgo-misc-kdenlive ezgo-misc-klavaro ezgo-misc-ktuberling \
                            ezgo-misc-qtqr ezgo-misc-winff ezgo-misc-7zip ezgo-misc-audacity ezgo-misc-tuxpaint \
-    && apt-get autoremove \
+    && apt-get remove -y scratch \
+    && echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections \
+    && apt-get -y install msttcorefonts fontconfig \
+    && fc-cache -f -v \
+    && apt-get autoremove -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && useradd -m -s /bin/bash -G sudo,pulse-access ezgo \
-    && echo "ezgo:ezgo" | chpasswd \
+    && echo "ezgo:ezgo" | chpasswd -e \
     && echo 'ezgo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
-    && echo "zh_TW.UTF-8 UTF-8" > /etc/locale.gen \
-    && locale-gen "zh_TW.UTF-8" \
-    && ln -snf /usr/share/zoneinfo/Asia/Taipei /etc/localtime && echo Asia/Taipei > /etc/timezone \
     && sed -i 's/LANG=\(.*\)/LANG=\"zh_TW.UTF-8\"/g' /etc/default/locale \
     && sed -i 's/LANGUAGE=\(.*\)/LANGUAGE=\"zh_TW.UTF-8\"/g' /etc/default/locale \
     && sed -i 's/defaultWallpaperTheme=.*/defaultWallpaperTheme=ezgo/' /usr/share/plasma/desktoptheme/*/metadata.desktop \
@@ -46,16 +49,22 @@ RUN apt-get update \
     && cd /usr/lib/noVNC/utils \
     && git clone https://github.com/novnc/websockify \
     && xrdp-keygen xrdp auto \
-    && echo "dbus-launch startplasma-x11" >> /home/ezgo/.xsession \
-    && echo 'allowed_users=anybody' > /etc/X11/Xwrapper.config \
     && echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4 \
-    && mkdir -p /root/.config && touch /root/.config/rc \
-    && chown -R ezgo:ezgo /home/ezgo \
-    && sed -i 's/.*kdeinit/###&/' /usr/bin/startplasma-x11
+    && cp /home/neon/.gitconfig /home/ezgo/.gitconfig \
+    && mkdir /home/ezgo/.config && cp /home/neon/.config/kwinrc /home/ezgo/.config \
+    && userdel -r neon \
+    && mkdir /run/ezgo \
+    && chown -R ezgo:ezgo /home/ezgo /run/ezgo \
+    && chmod -R 7700 /run/ezgo 
 
 COPY plasmarc /etc/skel/.config/plasmarc
 COPY servers.conf /etc/supervisor/conf.d/servers.conf
 COPY google-chrome.desktop /usr/share/applications/google-chrome.desktop
+
+ENV DISPLAY :1
+ENV KDE_FULL_SESSION true
+ENV SHELL /bin/bash
+ENV XDG_RUNTIME_DIR /run/ezgo
 USER ezgo
 WORKDIR /home/ezgo
 
