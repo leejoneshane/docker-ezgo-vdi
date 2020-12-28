@@ -10,7 +10,7 @@ RUN apt-get update \
     && apt-get install -y tzdata locales \
     && echo "zh_TW.UTF-8 UTF-8" > /etc/locale.gen \
     && locale-gen "zh_TW.UTF-8" \
-    && apt-get install -yq sudo pulseaudio gnupg2 wget git vim mc software-properties-common python \
+    && apt-get install -yq sudo pavucontrol pulseaudio gnupg2 wget git vim mc software-properties-common python \
                         language-pack-gnome-zh-hant language-pack-kde-zh-hant \
     && apt-get install -yq dbus-x11 x11vnc xvfb xrdp supervisor \
     && wget -q https://free.nchc.org.tw/ezgo-core/ezgo.gpg.key -O- | sudo apt-key add - \
