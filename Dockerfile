@@ -44,15 +44,14 @@ RUN mv /home/neon /home/ezgo \
     && usermod -d /home/ezgo -l ezgo neon \
     && echo "ezgo\nezgo" | passwd ezgo \
     && echo 'ezgo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
-    && sed -i 's/defaultWallpaperTheme=.*/defaultWallpaperTheme=ezgo/' /usr/share/plasma/desktoptheme/*/metadata.desktop \
-    && sed -i 's/defaultWidth=.*/defaultWidth=1920/' /usr/share/plasma/desktoptheme/*/metadata.desktop \
-    && sed -i 's/defaultHeight=.*/defaultHeight=1080/' /usr/share/plasma/desktoptheme/*/metadata.desktop \
     && echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4 \
     && mkdir /run/ezgo \
-    && chown -R 1001:1001 /run/ezgo \
-    && chmod -R 7700 /run/ezgo 
+    && chown -R ezgo:neon /home/ezgo /run/ezgo \
+    && chmod -R 755 /home/ezgo/.config \
+    && chmod -R 7700 /run/ezgo \
+    && rm -rf /usr/share/wallpapers/ezgo/contents/images/2560x1600.png \
+    && sed -i 's/Image=.*/Image=ezgo/' /usr/share/plasma/look-and-feel/org.kde.breeze.desktop/contents/defaults
 
-COPY plasmarc /etc/skel/.config/plasmarc
 COPY servers.conf /etc/supervisor/conf.d/servers.conf
 COPY google-chrome.desktop /usr/share/applications/google-chrome.desktop
 

@@ -1,6 +1,0 @@
-[Theme]
-name=ezgo
-
-kdeglobals
-[KDE]
-LookAndFeelPackage=org.kde.ezgo.desktop
