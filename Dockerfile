@@ -45,6 +45,7 @@ RUN mv /home/neon /home/ezgo \
     && echo "ezgo\nezgo" | passwd ezgo \
     && echo 'ezgo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
     && echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4 \
+    && echo 'exit-idle-time = -1' >> /etc/pulse/daemon.conf \
     && mkdir /run/ezgo \
     && chown -R ezgo:neon /home/ezgo /run/ezgo \
     && chmod -R 755 /home/ezgo/.config \
