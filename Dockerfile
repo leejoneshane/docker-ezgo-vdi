@@ -10,9 +10,15 @@ RUN apt-get update \
     && apt-get install -y tzdata locales \
     && echo "zh_TW.UTF-8 UTF-8" > /etc/locale.gen \
     && locale-gen "zh_TW.UTF-8" \
-    && apt-get install -yq sudo pavucontrol pulseaudio gnupg2 wget git vim mc software-properties-common python \
+    && apt-get install -yq sudo build-essential autopoint libpulse-dev libtool libsndfile1-dev pavumeter pulseaudio gnupg2 wget git vim mc software-properties-common python \
                         language-pack-gnome-zh-hant language-pack-kde-zh-hant \
     && apt-get install -yq dbus-x11 x11vnc xvfb xrdp supervisor \
+    && cd /root && git clone https://gitlab.freedesktop.org/pulseaudio/pulseaudio.git \
+    && cd pulseaudio && ./bootstrap.sh --without-caps \
+    && cd /root && git clone https://github.com/neutrinolabs/pulseaudio-module-xrdp.git \
+    && cd pulseaudio-module-xrdp && ./bootstrap && ./configure PULSE_DIR=/root/pulseaudio \
+    && make && make install \
+    && cd /root && rm -rf /root/pulseaudio && rm -rf /root/pulseaudio-module-xrdp \
     && wget -q https://free.nchc.org.tw/ezgo-core/ezgo.gpg.key -O- | sudo apt-key add - \
     && echo "deb http://free.nchc.org.tw/ezgo-core testing main" | tee /etc/apt/sources.list.d/ezgo.list \
     && apt-get update \
@@ -27,8 +33,6 @@ RUN apt-get update \
     && fc-cache -f -v \
     && echo "run_im fcitx" > /etc/skel/.xinputrc \
     && apt-get autoremove -y \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
     && wget https://github.com/scratux/scratux/releases/download/1.4.1/scratux_1.4.1_amd64.deb \
     && dpkg -i scratux_1.4.1_amd64.deb && rm -f scratux_1.4.1_amd64.deb \
     && wget -O chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
