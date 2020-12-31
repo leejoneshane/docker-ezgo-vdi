@@ -18,7 +18,7 @@
 ```
 docker run -p 80:80 -d leejoneshane/ezgo-vdi
 ```
-使用瀏覽器打開 http://localhost，若詢問密碼請輸入 __ezgo__。
+使用瀏覽器打開 http://localhost ，若詢問密碼請輸入 __ezgo__。
 
 **使用 VNC 連線**
 
