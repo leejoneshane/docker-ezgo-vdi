@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  ezgo-kde:
+    image: leejoneshane/ezgo-vdi
+    privileged: true
+    cap_add:
+    - ALL
+    hostname: ezgo.xxps.tp.edu.tw
+    networks:
+    - core-infra
+    ports:
+    - "3389:3389"
+    - "5900:5900"
+    deploy:
+      labels:
+        traefik.enable: "true"
+        traefik.http.services.ezgo.loadbalancer.server.port: "80"
+        traefik.http.services.ezgo.loadbalancer.server.scheme: "http"
+        traefik.http.routers.ezgo_http.entrypoints: "web"
+        traefik.http.routers.ezgo_http.rule: "Host(`ezgo.xxps.tp.edu.tw`)"
+        traefik.http.routers.ezgo_http.middlewares: "https_redirect"
+        traefik.http.routers.ezgo_https.entrypoints: "web-secure"
+        traefik.http.routers.ezgo_https.rule: "Host(`ezgo.xxps.tp.edu.tw`)"
+        traefik.http.routers.ezgo_https.tls: "true"
+        traefik.http.routers.ezgo_https.tls.certresolver: "letsencrypt"
+    
+networks:
+  core-infra:
+    external: true
