@@ -68,7 +68,8 @@ RUN mv /home/neon /home/ezgo \
     && chmod -R 755 /home/ezgo/.config \
     && chmod -R 7700 /run/ezgo \
     && rm -rf /usr/share/wallpapers/ezgo/contents/images/2560x1600.png \
-    && sed -i 's/Image=.*/Image=ezgo/' /usr/share/plasma/look-and-feel/org.kde.breeze.desktop/contents/defaults
+    && sed -i 's/Image=.*/Image=ezgo/' /usr/share/plasma/look-and-feel/org.kde.breeze.desktop/contents/defaults \
+    && sed -i "s/; autospawn=*/autospawn=yes/" /etc/pulse/client.conf
 
 COPY securetty /etc/securetty
 COPY servers.conf /etc/supervisor/conf.d/servers.conf
@@ -82,6 +83,8 @@ ENV XDG_CONFIG_HOME /home/ezgo/.config
 ENV XDG_RUNTIME_DIR /run/ezgo
 ENV XMODIFIERS @im=fcitx
 ENV QT_IM_MODULE fcitx
+ENV PULSE_SERVER unix:/home/ezgo/.config/pulse/native-sock
+ENV PULSE_COOKIE unix:/home/ezgo/.config/pulse/cookie
 USER ezgo
 WORKDIR /home/ezgo
 
