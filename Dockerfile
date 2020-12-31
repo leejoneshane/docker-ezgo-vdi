@@ -1,3 +1,19 @@
+ARG TAG=rolling
+FROM ubuntu:$TAG as builder
+
+RUN apt-get update \
+    && DEBIAN_FRONTEND="noninteractive" apt-get install -y --no-install-recommends \
+        m4 libtool build-essential dpkg-dev git libpulse-dev libcap-dev libudev-dev \
+        libsndfile1-dev libspeexdsp-dev libdbus-1-dev libdbus-glib-1-dev libltdl-dev pulseaudio \
+    && rm -rf /var/lib/apt/lists/* \
+    && git config --global http.sslverify false \
+    && cd /root && git clone git://git.launchpad.net/~ubuntu-audio-dev/pulseaudio \
+    && cd pulseaudio && ./configure \
+    && cd /root && git clone https://github.com/neutrinolabs/pulseaudio-module-xrdp.git \
+    && cd pulseaudio-module-xrdp && ./bootstrap && ./configure PULSE_DIR=/root/pulseaudio \
+    && make && make install \
+    && cd /root && rm -rf /root/pulseaudio && rm -rf /root/pulseaudio-module-xrdp
+
 FROM kdeneon/plasma
 
 ENV LC_ALL zh_TW.UTF-8
@@ -10,15 +26,10 @@ RUN apt-get update \
     && apt-get install -y tzdata locales \
     && echo "zh_TW.UTF-8 UTF-8" > /etc/locale.gen \
     && locale-gen "zh_TW.UTF-8" \
-    && apt-get install -yq sudo build-essential autopoint libpulse-dev libtool libsndfile1-dev pavumeter pulseaudio gnupg2 wget git vim mc software-properties-common python \
-                        language-pack-gnome-zh-hant language-pack-kde-zh-hant \
+    && apt-get install -yq sudo pavucontrol pulseaudio pulseaudio-utils \
+                           gnupg2 wget git vim mc software-properties-common python \
+                           language-pack-gnome-zh-hant language-pack-kde-zh-hant \
     && apt-get install -yq dbus-x11 x11vnc xvfb xrdp supervisor \
-    && cd /root && git clone https://gitlab.freedesktop.org/pulseaudio/pulseaudio.git \
-    && cd pulseaudio && ./bootstrap.sh --without-caps \
-    && cd /root && git clone https://github.com/neutrinolabs/pulseaudio-module-xrdp.git \
-    && cd pulseaudio-module-xrdp && ./bootstrap && ./configure PULSE_DIR=/root/pulseaudio \
-    && make && make install \
-    && cd /root && rm -rf /root/pulseaudio && rm -rf /root/pulseaudio-module-xrdp \
     && wget -q https://free.nchc.org.tw/ezgo-core/ezgo.gpg.key -O- | sudo apt-key add - \
     && echo "deb http://free.nchc.org.tw/ezgo-core testing main" | tee /etc/apt/sources.list.d/ezgo.list \
     && apt-get update \
@@ -44,19 +55,22 @@ RUN apt-get update \
     && git clone https://github.com/novnc/websockify \
     && xrdp-keygen xrdp auto
 
+COPY --from=builder /usr/lib/pulse-*/modules/module-xrdp-sink.so /usr/lib/pulse-*/modules/module-xrdp-source.so /var/lib/xrdp-pulseaudio-installer/
+
 RUN mv /home/neon /home/ezgo \
-    && usermod -d /home/ezgo -l ezgo neon \
-    && echo "ezgo\nezgo" | passwd ezgo \
+    && useradd -G admin,video,sudo,pulse-access -d /home/ezgo -ms /bin/bash ezgo \
+    && echo 'ezgo:ezgo' | chpasswd \
     && echo 'ezgo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
     && echo 'Acquire::ForceIPv4 "true";' > /etc/apt/apt.conf.d/99force-ipv4 \
     && echo 'exit-idle-time = -1' >> /etc/pulse/daemon.conf \
     && mkdir /run/ezgo \
-    && chown -R ezgo:neon /home/ezgo /run/ezgo \
+    && chown -R ezgo:ezgo /home/ezgo /run/ezgo \
     && chmod -R 755 /home/ezgo/.config \
     && chmod -R 7700 /run/ezgo \
     && rm -rf /usr/share/wallpapers/ezgo/contents/images/2560x1600.png \
     && sed -i 's/Image=.*/Image=ezgo/' /usr/share/plasma/look-and-feel/org.kde.breeze.desktop/contents/defaults
 
+COPY securetty /etc/securetty
 COPY servers.conf /etc/supervisor/conf.d/servers.conf
 COPY google-chrome.desktop /usr/share/applications/google-chrome.desktop
 
