@@ -12,7 +12,7 @@
     網頁）不支援聲音頻道。
 
 
-##網頁連線##
+## 網頁連線 ##
 
 請以底下指令啟動容器，並開啟 80 埠
 ```
@@ -20,7 +20,7 @@ docker run -p 80:80 -d leejoneshane/ezgo-vdi
 ```
 使用瀏覽器打開 http://localhost ，若詢問密碼請輸入 __ezgo__。
 
-##使用 VNC 連線##
+## 使用 VNC 連線 ##
 
 如果要啟用 VNC 連線，則必須開啟 5900 埠
 ```
@@ -28,7 +28,7 @@ docker run -p 5900:5900 -d leejoneshane/ezgo-vdi
 ```
 然後，您可以使用 VNC 用戶端程式進行連線。如果您使用 Mac 電腦， macos 系統內建的 VNC 連線工具並不支援非安全連線。請改用其它程式或者使用瀏覽器中的 VNC 插件即可。
 
-##使用微軟遠端桌面連線##
+## 使用微軟遠端桌面連線 ##
 
 如果要啟用微軟遠端桌面連線，則必須開啟 3389 埠
 ```
@@ -37,7 +37,7 @@ docker run -p 3389:3389 -d leejoneshane/ezgo-vdi
 在您的 Windows 命令列模式輸入 mstsc 開啟連線程式。
 如果是蘋果電腦，請從 App 商店下載安裝 Microsoft Remote Desktop。
 
-##使用 Swarm 部署##
+## 使用 Swarm 部署 ##
 
 使用 Swarm 部署可以一次啟用多個容器，數量可以自行調節。
 可透過 traefik 進行 HTTPS 保護，並自動取得金鑰。
