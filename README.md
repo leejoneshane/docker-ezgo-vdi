@@ -35,8 +35,10 @@ docker run -p 5900:5900 -d leejoneshane/ezgo-vdi
 docker run -p 3389:3389 -d leejoneshane/ezgo-vdi
 ```
 在您的 Windows 命令列模式輸入 mstsc 開啟連線程式。
+
 如果是蘋果電腦，請從 App 商店下載安裝 Microsoft Remote Desktop。
-或者您可以使用開源的 (freeRDP)[https://www.freerdp.com/]
+
+或者您可以使用開源的 [freeRDP](https://www.freerdp.com/)
 
 ## 使用 Swarm 部署 ##
 
